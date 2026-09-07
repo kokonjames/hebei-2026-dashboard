@@ -281,7 +281,7 @@ tr.new-week:hover td{background:#fff3df!important}
   <div class="section">
     <div class="sec-ttl">各厂家规格医院覆盖分析</div>
     <div class="sum-line">
-      <span>颐合恒瑞：<b>2种规格</b>（1克 / 2克）覆盖 35家医院</span>
+      <span>颐合恒瑞：<b>2种规格</b>（1克 / 2克）覆盖 37家医院</span>
       <span>佰傲：<b>5种规格</b>（0.5–2.5克）覆盖 33家医院</span>
       <span>鹏冠：<b>4种规格</b>（0.5克 / 1克 / 2克 / 3克）覆盖 25家医院</span>
     </div>
@@ -298,7 +298,7 @@ tr.new-week:hover td{background:#fff3df!important}
       <!-- 颐合恒瑞 -->
       <div style="background:#f4f8fd;border-radius:8px;padding:16px;border-top:3px solid #4e79a7">
         <div style="font-weight:700;color:#1d5f9e;margin-bottom:12px;font-size:13px">
-          颐合恒瑞 &nbsp;<span style="font-weight:400;color:#888">35家医院 · 2种规格</span>
+          颐合恒瑞 &nbsp;<span style="font-weight:400;color:#888">37家医院 · 2种规格</span>
         </div>
         <table style="width:100%;border-collapse:collapse;font-size:12px">
           <thead><tr>
@@ -309,7 +309,7 @@ tr.new-week:hover td{background:#fff3df!important}
           <tbody id="specTbYH"></tbody>
         </table>
         <div style="margin-top:10px;font-size:11px;color:#888">
-          1克覆盖：<b style="color:#1d5f9e">17家</b> &nbsp;|&nbsp; 2克覆盖：<b style="color:#1d5f9e">16家</b>
+          1克覆盖：<b style="color:#1d5f9e">18家</b> &nbsp;|&nbsp; 2克覆盖：<b style="color:#1d5f9e">17家</b>
         </div>
       </div>
 
@@ -356,7 +356,7 @@ tr.new-week:hover td{background:#fff3df!important}
   <div class="section">
     <div class="sec-ttl">采购平台实际采购医院全清单（共65家 · 三家厂商合计）</div>
     <div class="sum-line">
-      <span><span style="color:#1d5f9e;font-weight:700">★ 已采购颐合恒瑞</span>：<b>35家</b></span>
+      <span><span style="color:#1d5f9e;font-weight:700">★ 已采购颐合恒瑞</span>：<b>37家</b></span>
       <span>仅采购竞品：<b>36家</b></span>
       <span>多品牌并采：<b>11家</b></span>
       <span>覆盖地市：<b>11个</b></span>
@@ -410,7 +410,7 @@ tr.new-week:hover td{background:#fff3df!important}
         <tbody id="tbUnpurchased"></tbody>
       </table>
     </div>
-    <div class="note">注：已正式报量医院共59家，其中23家已有颐合恒瑞平台采购记录，其余<span id="unpurchasedCount2">—</span>家尚未在平台采购颐合恒瑞（含已采购其他品牌的医院），是近期重点推动下单的目标。</div>
+    <div class="note">注：已正式报量医院共59家，其中24家已有颐合恒瑞平台采购记录，其余<span id="unpurchasedCount2">—</span>家尚未在平台采购颐合恒瑞（含已采购其他品牌的医院），是近期重点推动下单的目标。</div>
   </div>
 
   <!-- ═══ 竞品采购分析 ═══ -->
@@ -466,6 +466,7 @@ const ALL_HOSPITALS = [
   {city:'石家庄',name:'河北省中医院',                                  yh:1,  bao:0,  pg:0,  total:1,  last:'2026-08-07'},
   {city:'石家庄',name:'平山县人民医院',                                yh:1,  bao:0,  pg:1,  total:2,  last:'2026-09-05', pgNew:1},
   {city:'石家庄',name:'辛集市第一医院',                                yh:2,  bao:0,  pg:0,  total:2,  last:'2026-08-12'},
+  {city:'石家庄',name:'辛集市中医院',                                  yh:2,  bao:0,  pg:0,  total:2,  last:'2026-09-04', isNew:true, yhNew:2},
   {city:'石家庄',name:'高邑县医院',                                    yh:2,  bao:0,  pg:0,  total:2,  last:'2026-08-26'},
   {city:'石家庄',name:'河北省人民医院',                                yh:1,  bao:0,  pg:4,  total:5,  last:'2026-09-04', isNew:true, yhNew:1, pgNew:2},
   {city:'石家庄',name:'石家庄市鹿泉区铜冶镇中心卫生院永壁分院',       yh:0,  bao:1,  pg:0,  total:1,  last:'2026-08-12'},
@@ -516,6 +517,7 @@ const ALL_HOSPITALS = [
   {city:'邢台',  name:'柏乡县中心医院',                                yh:0,  bao:4,  pg:1,  total:5,  last:'2026-09-04', baoNew:1},
   {city:'邢台',  name:'邢台市任泽区人民医院',                          yh:0,  bao:1,  pg:0,  total:1,  last:'2026-08-31', isNew:true, baoNew:1},
   {city:'邢台',  name:'邢台槐阳医院',                                  yh:0,  bao:1,  pg:0,  total:1,  last:'2026-09-02', isNew:true, baoNew:1},
+  {city:'邢台',  name:'临西县中医院',                                  yh:1,  bao:0,  pg:0,  total:1,  last:'2026-09-04', isNew:true, yhNew:1},
   // ── 张家口（5家）──
   {city:'张家口',name:'怀来县医院',                                    yh:13, bao:0,  pg:0,  total:13, last:'2026-09-04', notIn3:true, yhNew:3},
   {city:'张家口',name:'张家口市宣化区人民医院',                        yh:2,  bao:0,  pg:1,  total:3,  last:'2026-08-19', notIn3:true},
@@ -627,7 +629,6 @@ const UNPURCHASED = [
   {city:'石家庄',name:'赵县人民医院',                           grade:'C',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'—'},
   {city:'石家庄',name:'石家庄新乐市中医院',                     grade:'C',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'—'},
   {city:'石家庄',name:'石家庄医学高等专科学校附属医院',         grade:'C',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'—'},
-  {city:'石家庄',name:'辛集市中医院',                           grade:'C',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'—'},
   // ── 唐山（4家）──
   {city:'唐山',  name:'唐山市第二医院',                         grade:'A',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'九思堂唐山贸易有限公司'},
   {city:'唐山',  name:'唐山人民医院',                           grade:'B',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'河北深格商贸有限公司'},
@@ -873,8 +874,8 @@ new Chart(document.getElementById('cComp'),{
 // ════════════════════════════════
 const SPEC_COMBOS = {
   yh: [
-    {label:'仅 1克', cnt:16, color:'#6fa0c7', hospitals:'唐山虹桥骨科医院、蔚县蔚州医院、三河燕郊福合第一医院、高邑县医院、滦南慈济中医医院、深州市中西医结合医院、滦州市人民医院、张北县医院、河北医科大学第四医院、邯郸汇仁中医医院、磁县人民医院、武安仁慈医院、唐山市中医医院、磁县中医院、保定市第一中心医院、邯郸市人民医院'},
-    {label:'仅 2克', cnt:13, color:'#4e79a7', hospitals:'定兴县医院、廊坊香河医康医院、张家口市下花园区医院、张家口市宣化区人民医院、河北燕达医院、辛集市第一医院、怀来县医院、河北省胸科医院、平山县人民医院、邢台市信都区人民医院、河北省中医院、中国人民解放军联勤保障部队第九八〇医院、河北省人民医院'},
+    {label:'仅 1克', cnt:17, color:'#6fa0c7', hospitals:'唐山虹桥骨科医院、蔚县蔚州医院、三河燕郊福合第一医院、高邑县医院、滦南慈济中医医院、深州市中西医结合医院、滦州市人民医院、张北县医院、河北医科大学第四医院、邯郸汇仁中医医院、磁县人民医院、武安仁慈医院、唐山市中医医院、磁县中医院、保定市第一中心医院、邯郸市人民医院、临西县中医院'},
+    {label:'仅 2克', cnt:14, color:'#4e79a7', hospitals:'定兴县医院、廊坊香河医康医院、张家口市下花园区医院、张家口市宣化区人民医院、河北燕达医院、辛集市第一医院、怀来县医院、河北省胸科医院、平山县人民医院、邢台市信都区人民医院、河北省中医院、中国人民解放军联勤保障部队第九八〇医院、河北省人民医院、辛集市中医院'},
     {label:'1克 + 2克', cnt:4, color:'#2a5a8c', hospitals:'河间市人民医院、北京大学第三医院秦皇岛医院、河北医科大学第二医院、邯郸市永年区第一医院'},
   ],
   bao: [
@@ -921,7 +922,7 @@ new Chart(document.getElementById('cSpecCov'), {
   data: {
     labels: ['0.5克', '1克', '1.5克', '2克', '2.5克', '3克'],
     datasets: [
-      {label:'颐合恒瑞', data:[0, 19, 0, 17, 0, 0],  backgroundColor:colors.yh,  borderRadius:4},
+      {label:'颐合恒瑞', data:[0, 20, 0, 18, 0, 0],  backgroundColor:colors.yh,  borderRadius:4},
       {label:'佰傲',     data:[2, 19, 3,  8, 11, 0],  backgroundColor:colors.bao, borderRadius:4},
       {label:'鹏冠',     data:[2, 14, 0,  8,  0, 1],  backgroundColor:colors.pg,  borderRadius:4},
     ]
