@@ -181,6 +181,15 @@ tr:hover td{background:rgba(88,166,255,.04)}
   </div>
 </div>
 
+<!-- ═══ WEEKLY CHART ═══ -->
+<div class="section">
+  <div class="section-title">每周新增克数</div>
+  <div class="chart-box">
+    <div class="chart-title">平台后台订单·每周采购量（克）· 数据来源：821/828/9-4 后台订单截图</div>
+    <div class="chart-area" id="chart-weekly" style="height:220px"></div>
+  </div>
+</div>
+
 <!-- ═══ TABLE ═══ -->
 <div class="section">
   <div class="section-title">医院明细</div>
@@ -398,6 +407,35 @@ function baseOpts(title) {
       {name:'省代发货(克)',type:'bar',barMaxWidth:18,data:cities.map(c=>CSTATS[c].ship_g||0),itemStyle:{color:'#e3b341'}},
       {name:'实采(克)',    type:'bar',barMaxWidth:18,data:cities.map(c=>CSTATS[c].total_g||0),itemStyle:{color:'#3fb950'}}
     ]
+  });
+  chart.setOption(opts);
+  window.addEventListener('resize',()=>chart.resize());
+})();
+
+// ── Chart 6: 每周新增克数 ─────────────────────────────────
+(function(){
+  const chart = echarts.init(document.getElementById('chart-weekly'));
+  const weeks = ['7/13-19','7/20-26','7/27-8/2','8/3-9','8/10-16','8/17-23','8/24-30','8/31-9/6'];
+  const grams = [16, 93, 91, 256, 39, 99, 252, 230];
+  const avg   = Math.round(grams.reduce((a,b)=>a+b,0)/grams.length);
+  const opts = Object.assign(baseOpts(), {
+    tooltip:{trigger:'axis',formatter:p=>`${p[0].name}<br/>采购量：<b>${p[0].value} 克</b>`},
+    xAxis:{type:'category',data:weeks,axisLabel:{color:theme.axisFg,fontSize:11},axisLine:{lineStyle:{color:theme.gridLine}},splitLine:{show:false}},
+    yAxis:{type:'value',name:'克',nameTextStyle:{color:theme.axisFg,fontSize:10},axisLabel:{color:theme.axisFg,fontSize:10},splitLine:{lineStyle:{color:theme.gridLine}},axisLine:{show:false}},
+    series:[
+      {
+        type:'bar', data:grams, barMaxWidth:40,
+        itemStyle:{color:p=>p.value>=200?new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#f85149'},{offset:1,color:'#da3633'}]):new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#388bfd'},{offset:1,color:'#1f6feb'}])},
+        label:{show:true,position:'top',color:theme.axisFg,fontSize:11,fontWeight:600,formatter:p=>p.value+'克'}
+      },
+      {
+        type:'line', data:grams.map(()=>avg), smooth:true, symbol:'none',
+        lineStyle:{color:'#e3b341',type:'dashed',width:1.5},
+        markPoint:{data:[],silent:true},
+        tooltip:{show:false}
+      }
+    ],
+    graphic:[{type:'text',left:'center',bottom:2,style:{text:'— 均值 '+avg+'克/周',fill:'#e3b341',fontSize:10}}]
   });
   chart.setOption(opts);
   window.addEventListener('resize',()=>chart.resize());
