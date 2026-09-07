@@ -309,7 +309,7 @@ tr.new-week:hover td{background:#fff3df!important}
           <tbody id="specTbYH"></tbody>
         </table>
         <div style="margin-top:10px;font-size:11px;color:#888">
-          1克覆盖：<b style="color:#1d5f9e">18家</b> &nbsp;|&nbsp; 2克覆盖：<b style="color:#1d5f9e">17家</b>
+          1克覆盖：<b style="color:#1d5f9e">23家</b> &nbsp;|&nbsp; 2克覆盖：<b style="color:#1d5f9e">19家</b>
         </div>
       </div>
 
@@ -874,9 +874,9 @@ new Chart(document.getElementById('cComp'),{
 // ════════════════════════════════
 const SPEC_COMBOS = {
   yh: [
-    {label:'仅 1克', cnt:17, color:'#6fa0c7', hospitals:'唐山虹桥骨科医院、蔚县蔚州医院、三河燕郊福合第一医院、高邑县医院、滦南慈济中医医院、深州市中西医结合医院、滦州市人民医院、张北县医院、河北医科大学第四医院、邯郸汇仁中医医院、磁县人民医院、武安仁慈医院、唐山市中医医院、磁县中医院、保定市第一中心医院、邯郸市人民医院、临西县中医院'},
+    {label:'仅 1克', cnt:18, color:'#6fa0c7', hospitals:'唐山虹桥骨科医院、蔚县蔚州医院、三河燕郊福合第一医院、高邑县医院、滦南慈济中医医院、深州市中西医结合医院、滦州市人民医院、张北县医院、河北医科大学第四医院、邯郸汇仁中医医院、磁县人民医院、武安仁慈医院、唐山市中医医院、磁县中医院、保定市第一中心医院、邯郸市人民医院、临西县中医院、保定市第二中心医院'},
     {label:'仅 2克', cnt:14, color:'#4e79a7', hospitals:'定兴县医院、廊坊香河医康医院、张家口市下花园区医院、张家口市宣化区人民医院、河北燕达医院、辛集市第一医院、怀来县医院、河北省胸科医院、平山县人民医院、邢台市信都区人民医院、河北省中医院、中国人民解放军联勤保障部队第九八〇医院、河北省人民医院、辛集市中医院'},
-    {label:'1克 + 2克', cnt:4, color:'#2a5a8c', hospitals:'河间市人民医院、北京大学第三医院秦皇岛医院、河北医科大学第二医院、邯郸市永年区第一医院'},
+    {label:'1克 + 2克', cnt:5, color:'#2a5a8c', hospitals:'河间市人民医院、北京大学第三医院秦皇岛医院、河北医科大学第二医院、邯郸市永年区第一医院、保定市第二医院（老年医院）'},
   ],
   bao: [
     {label:'仅 0.5克',          cnt:2, color:'#fceacc', hospitals:'石家庄市鹿泉区铜冶镇中心卫生院永壁分院、石家庄长城中西医结合医院'},
@@ -922,7 +922,7 @@ new Chart(document.getElementById('cSpecCov'), {
   data: {
     labels: ['0.5克', '1克', '1.5克', '2克', '2.5克', '3克'],
     datasets: [
-      {label:'颐合恒瑞', data:[0, 20, 0, 18, 0, 0],  backgroundColor:colors.yh,  borderRadius:4},
+      {label:'颐合恒瑞', data:[0, 23, 0, 19, 0, 0],  backgroundColor:colors.yh,  borderRadius:4},
       {label:'佰傲',     data:[2, 19, 3,  8, 11, 0],  backgroundColor:colors.bao, borderRadius:4},
       {label:'鹏冠',     data:[2, 14, 0,  8,  0, 1],  backgroundColor:colors.pg,  borderRadius:4},
     ]
