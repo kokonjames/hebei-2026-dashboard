@@ -193,7 +193,7 @@ tr.new-week:hover td{background:#fff3df!important}
         </div>
         <div style="width:1px;background:rgba(255,255,255,.18);align-self:stretch"></div>
         <div>
-          <div style="font-size:40px;font-weight:900;color:#fff;line-height:1">126</div>
+          <div style="font-size:40px;font-weight:900;color:#fff;line-height:1">133</div>
           <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:5px">采购总笔数（笔）</div>
         </div>
       </div>
@@ -258,7 +258,7 @@ tr.new-week:hover td{background:#fff3df!important}
       <div class="wu-item pg"><span class="wu-num" style="color:#276d27">+4</span><span class="wu-lbl">新增鹏冠医院</span></div>
       <div class="wu-item pg"><span class="wu-num" style="color:#276d27">+7</span><span class="wu-lbl">鹏冠笔数环比（+12%）</span></div>
       <div class="wu-extra" id="wuExtra">
-        <b class="b-yh">颐合恒瑞：</b>新增8家采购医院（<b class="b-yh">临西县中医院</b>、<b class="b-yh">临西县第二人民医院</b>、<b class="b-yh">宁晋县中西医结合医院</b>、<b class="b-yh">平乡县中西医结合医院</b>、<b class="b-yh">沧州和平医院</b>、<b class="b-yh">辛集市中医院</b>、<b class="b-yh">邯郸华景医院</b>、<b class="b-yh">广安门医院保定医院</b>首次颐封采购）；存量增量：<b class="b-yh">河北医科大学第二医院</b> +2笔（→21笔）、<b class="b-yh">河间市人民医院</b> +1笔（→17笔）、<b class="b-yh">怀来县医院</b> +1笔（→14笔）、<b class="b-yh">河北燕达医院</b> +1笔（→6笔）。<br>
+        <b class="b-yh">颐合恒瑞：</b>新增8家采购医院（<b class="b-yh">临西县中医院</b>、<b class="b-yh">临西县第二人民医院</b>、<b class="b-yh">宁晋县中西医结合医院</b>、<b class="b-yh">平乡县中西医结合医院</b>、<b class="b-yh">沧州和平医院</b>、<b class="b-yh">辛集市中医院</b>、<b class="b-yh">邯郸华景医院</b>、<b class="b-yh">广安门医院保定医院</b>首次颐封采购）；存量增量：<b class="b-yh">河北医科大学第二医院</b> +9笔（→28笔）、<b class="b-yh">河间市人民医院</b> +1笔（→17笔）、<b class="b-yh">怀来县医院</b> +1笔（→14笔）、<b class="b-yh">河北燕达医院</b> +1笔（→6笔）。<br>
         <b class="b-bao">佰傲：</b>新增2家（<b class="b-bao">望都县医院</b> 1笔·1克、<b class="b-bao">石家庄市鹿泉区中医院</b> 1笔·1克）；存量增量最大：<b class="b-bao">河北医科大学第一医院</b> +2笔（→70笔）、保定市第一中心医院 +1笔（→9笔）、廊坊市第四人民医院 +1笔（→6笔）、中国人民解放军陆军第八十二集团军医院 +1笔（→4笔）。<br>
         <b class="b-pg">鹏冠：</b>新增4家（<b class="b-pg">沙河市人民医院</b>、<b class="b-pg">邢台市襄都区中心医院</b>·0.5克、<b class="b-pg">通用环球中煤岭北医院</b>·2克、<b class="b-pg">华北医疗健康集团峰峰总医院</b>·0.5克）；存量增量：<b class="b-pg">河北医科大学第二医院</b> +1笔（→20笔）、邯郸市中医院 +1笔（→2笔）、平山县人民医院 +1笔（→2笔）。
       </div>
@@ -457,7 +457,7 @@ tr.new-week:hover td{background:#fff3df!important}
 const ALL_HOSPITALS = [
   // ── 石家庄（18家）──
   {city:'石家庄',name:'河北医科大学第一医院',                          yh:0,  bao:70, pg:0,  total:70, last:'2026-09-08', baoNew:2},
-  {city:'石家庄',name:'河北医科大学第二医院',                          yh:21, bao:0,  pg:20, total:41, last:'2026-09-11', yhNew:2, pgNew:1},
+  {city:'石家庄',name:'河北医科大学第二医院',                          yh:28, bao:0,  pg:20, total:48, last:'2026-09-11', yhNew:9, pgNew:1},
   {city:'石家庄',name:'河北医科大学第四医院',                          yh:6,  bao:0,  pg:0,  total:6,  last:'2026-08-31'},
   {city:'石家庄',name:'中国人民解放军联勤保障部队第九八〇医院',         yh:4,  bao:5,  pg:0,  total:9,  last:'2026-09-11', yhNew:1},
   {city:'石家庄',name:'华北医疗健康集团石家庄华北医院',                yh:0,  bao:2,  pg:2,  total:4,  last:'2026-08-07'},
@@ -774,8 +774,8 @@ const COMPETITIVE = [
    yh:2, baoSpec:'', baoCnt:0, pgSpec:'2克', pgCnt:4,
    risk:'mid', note:'A级医院，颐合恒瑞2笔（2克），鹏冠4笔（2克），颐合落后，持续推进份额'},
   {city:'石家庄', name:'河北医科大学第二医院',          grade:'B', status:'正常使用',
-   yh:21, baoSpec:'', baoCnt:0, pgSpec:'2克', pgCnt:20,
-   risk:'low', note:'多品牌并采，颐合恒瑞21笔 > 鹏冠20笔，颐合已超越，继续保持领先'},
+   yh:28, baoSpec:'', baoCnt:0, pgSpec:'2克', pgCnt:20,
+   risk:'low', note:'多品牌并采，颐合恒瑞28笔 > 鹏冠20笔，颐合大幅领先，继续保持份额'},
   {city:'石家庄', name:'中国人民解放军联勤保障部队第九八〇医院', grade:'B', status:'正常使用',
    yh:4, baoSpec:'1克+2克+2.5克', baoCnt:5, pgSpec:'', pgCnt:0,
    risk:'mid', note:'多品牌并采，佰傲5笔 > 颐合恒瑞4笔，颐合恒瑞落后1笔，推动科室优先使用颐合'},
@@ -850,7 +850,7 @@ new Chart(document.getElementById('cComp'),{
       '燕达医院\n(B)'
     ],
     datasets:[
-      {label:'颐合恒瑞', data:[0, 0, 0, 0, 0, 1, 4, 2, 21, 4, 4, 2, 2, 6], backgroundColor:'#4e79a7', borderRadius:3, stack:'s'},
+      {label:'颐合恒瑞', data:[0, 0, 0, 0, 0, 1, 4, 2, 28, 4, 4, 2, 2, 6], backgroundColor:'#4e79a7', borderRadius:3, stack:'s'},
       {label:'佰傲',     data:[7, 5, 4, 0, 0, 9, 5,  0,  0, 5, 0, 1, 1, 0], backgroundColor:'#f28e2b', borderRadius:3, stack:'s'},
       {label:'鹏冠',     data:[0, 0, 1, 2, 1, 1, 0,  4, 20, 0, 3, 0, 0, 2], backgroundColor:'#59a14f', borderRadius:3, stack:'s'},
     ]
@@ -960,7 +960,7 @@ new Chart(document.getElementById('cSpec'),{
     ],
     datasets:[{
       label:'采购笔数',
-      data:[49, 36, 56, 37, 26, 1, 2, 27, 14, 1],
+      data:[74, 59, 81, 42, 32, 3, 3, 33, 25, 1],
       backgroundColor:[
         colors.yh,'#7fa8c7',
         colors.bao,'#f5aa55','#f8c87c','#fad9a0','#fceacc',
@@ -995,10 +995,10 @@ new Chart(document.getElementById('cSpec'),{
 new Chart(document.getElementById('cFreq'),{
   type:'bar',
   data:{
-    labels:['1笔\n(17家)','2笔\n(10家)','3-7笔\n(5家)','≥8笔\n(3家)'],
+    labels:['1笔\n(21家)','2笔\n(13家)','3-7笔\n(6家)','≥8笔\n(3家)'],
     datasets:[{
       label:'医院数',
-      data:[17, 10, 5, 3],
+      data:[21, 13, 6, 3],
       backgroundColor:['#90b8d8','#6fa0c7','#4e79a7','#e15759'],
       borderRadius:6
     }]
@@ -1014,8 +1014,8 @@ new Chart(document.getElementById('cFreq'),{
             const notes=[
               '',
               '',
-              '燕达(5笔)·医科大四(6笔)·联勤九八〇·武安仁慈·邯郸信都区',
-              '怀来(13笔)·河间(16笔)·医科大二(19笔)'
+              '燕达(6笔)·医科大四(6笔)·保二院(4笔)·联勤九八〇(4笔)·邢台信都区(4笔)·武安仁慈(3笔)',
+              '医科大二(28笔)·河间(17笔)·怀来(14笔)'
             ];
             return notes[ctx.dataIndex]||'';
           }
