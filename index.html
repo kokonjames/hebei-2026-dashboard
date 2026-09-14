@@ -193,7 +193,7 @@ tr.new-week:hover td{background:#fff3df!important}
         </div>
         <div style="width:1px;background:rgba(255,255,255,.18);align-self:stretch"></div>
         <div>
-          <div style="font-size:40px;font-weight:900;color:#fff;line-height:1">133</div>
+          <div style="font-size:40px;font-weight:900;color:#fff;line-height:1">138</div>
           <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:5px">采购总笔数（笔）</div>
         </div>
       </div>
@@ -258,7 +258,7 @@ tr.new-week:hover td{background:#fff3df!important}
       <div class="wu-item pg"><span class="wu-num" style="color:#276d27">+4</span><span class="wu-lbl">新增鹏冠医院</span></div>
       <div class="wu-item pg"><span class="wu-num" style="color:#276d27">+7</span><span class="wu-lbl">鹏冠笔数环比（+12%）</span></div>
       <div class="wu-extra" id="wuExtra">
-        <b class="b-yh">颐合恒瑞：</b>新增8家采购医院（<b class="b-yh">临西县中医院</b>、<b class="b-yh">临西县第二人民医院</b>、<b class="b-yh">宁晋县中西医结合医院</b>、<b class="b-yh">平乡县中西医结合医院</b>、<b class="b-yh">沧州和平医院</b>、<b class="b-yh">辛集市中医院</b>、<b class="b-yh">邯郸华景医院</b>、<b class="b-yh">广安门医院保定医院</b>首次颐封采购）；存量增量：<b class="b-yh">河北医科大学第二医院</b> +9笔（→28笔）、<b class="b-yh">河间市人民医院</b> +1笔（→17笔）、<b class="b-yh">怀来县医院</b> +1笔（→14笔）、<b class="b-yh">河北燕达医院</b> +1笔（→6笔）。<br>
+        <b class="b-yh">颐合恒瑞：</b>新增8家采购医院（<b class="b-yh">临西县中医院</b>、<b class="b-yh">临西县第二人民医院</b>、<b class="b-yh">宁晋县中西医结合医院</b>、<b class="b-yh">平乡县中西医结合医院</b>、<b class="b-yh">沧州和平医院</b>、<b class="b-yh">辛集市中医院</b>、<b class="b-yh">邯郸华景医院</b>、<b class="b-yh">广安门医院保定医院</b>首次颐封采购）；存量增量：<b class="b-yh">河北医科大学第二医院</b> +9笔（→28笔）、<b class="b-yh">河间市人民医院</b> +3笔（→19笔）、<b class="b-yh">怀来县医院</b> +1笔（→14笔）、<b class="b-yh">河北燕达医院</b> +1笔（→6笔）。<br>
         <b class="b-bao">佰傲：</b>新增2家（<b class="b-bao">望都县医院</b> 1笔·1克、<b class="b-bao">石家庄市鹿泉区中医院</b> 1笔·1克）；存量增量最大：<b class="b-bao">河北医科大学第一医院</b> +2笔（→70笔）、保定市第一中心医院 +1笔（→9笔）、廊坊市第四人民医院 +1笔（→6笔）、中国人民解放军陆军第八十二集团军医院 +1笔（→4笔）。<br>
         <b class="b-pg">鹏冠：</b>新增4家（<b class="b-pg">沙河市人民医院</b>、<b class="b-pg">邢台市襄都区中心医院</b>·0.5克、<b class="b-pg">通用环球中煤岭北医院</b>·2克、<b class="b-pg">华北医疗健康集团峰峰总医院</b>·0.5克）；存量增量：<b class="b-pg">河北医科大学第二医院</b> +1笔（→20笔）、邯郸市中医院 +1笔（→2笔）、平山县人民医院 +1笔（→2笔）。
       </div>
@@ -497,13 +497,13 @@ const ALL_HOSPITALS = [
   {city:'保定',  name:'涞水县医院',                                    yh:0,  bao:3,  pg:0,  total:3,  last:'2026-09-02', baoNew:2},
   {city:'保定',  name:'望都县医院',                                    yh:0,  bao:1,  pg:0,  total:1,  last:'2026-09-10', isNew:true, baoNew:1},
   // ── 沧州（2家）──
-  {city:'沧州',  name:'河间市人民医院',                                yh:17, bao:0,  pg:0,  total:17, last:'2026-09-09', yhNew:1},
+  {city:'沧州',  name:'河间市人民医院',                                yh:19, bao:0,  pg:0,  total:19, last:'2026-09-11', yhNew:3},
   {city:'沧州',  name:'沧州和平医院',                                  yh:1,  bao:0,  pg:0,  total:1,  last:'2026-09-09', isNew:true, yhNew:1},
   // ── 邯郸（14家）──
   {city:'邯郸',  name:'武安仁慈医院',                                  yh:3,  bao:0,  pg:0,  total:3,  last:'2026-08-10', notIn3:true},
   {city:'邯郸',  name:'磁县肿瘤医院',                                  yh:0,  bao:7,  pg:0,  total:7,  last:'2026-09-10', baoNew:1},
   {city:'邯郸',  name:'曲周县中医院',                                  yh:0,  bao:0,  pg:2,  total:2,  last:'2026-08-25'},
-  {city:'邯郸',  name:'磁县中医院',                                    yh:2,  bao:1,  pg:0,  total:3,  last:'2026-09-11', yhNew:1},
+  {city:'邯郸',  name:'磁县中医院',                                    yh:3,  bao:1,  pg:0,  total:4,  last:'2026-09-11', yhNew:2},
   {city:'邯郸',  name:'磁县人民医院',                                  yh:1,  bao:0,  pg:0,  total:1,  last:'2026-08-04'},
   {city:'邯郸',  name:'邯郸汇仁中医医院',                              yh:2,  bao:0,  pg:0,  total:2,  last:'2026-08-31'},
   {city:'邯郸',  name:'邯郸市中医院',                                  yh:0,  bao:0,  pg:2,  total:2,  last:'2026-09-11', pgNew:1},
@@ -529,7 +529,7 @@ const ALL_HOSPITALS = [
   // ── 张家口（5家）──
   {city:'张家口',name:'怀来县医院',                                    yh:14, bao:0,  pg:0,  total:14, last:'2026-09-08', notIn3:true, yhNew:1},
   {city:'张家口',name:'张家口市宣化区人民医院',                        yh:2,  bao:0,  pg:1,  total:3,  last:'2026-08-19', notIn3:true},
-  {city:'张家口',name:'张家口市下花园区医院',                          yh:2,  bao:0,  pg:0,  total:2,  last:'2026-08-28'},
+  {city:'张家口',name:'张家口市下花园区医院',                          yh:3,  bao:0,  pg:0,  total:3,  last:'2026-09-07', yhNew:1},
   {city:'张家口',name:'张北县医院',                                    yh:1,  bao:0,  pg:0,  total:1,  last:'2026-08-05', notIn3:true},
   {city:'张家口',name:'蔚县蔚州医院',                                  yh:2,  bao:0,  pg:0,  total:2,  last:'2026-09-07', notIn3:true, yhNew:1},
   // ── 秦皇岛（1家）──
@@ -538,7 +538,7 @@ const ALL_HOSPITALS = [
   {city:'廊坊',  name:'廊坊首都医科大学附属北京港澳医院香河医康医院', yh:2,  bao:0,  pg:0,  total:2,  last:'2026-08-20', notIn3:true},
   {city:'廊坊',  name:'河北燕达医院',                                  yh:6,  bao:0,  pg:2,  total:8,  last:'2026-09-07', yhNew:1},
   {city:'廊坊',  name:'固安县中医院',                                  yh:0,  bao:0,  pg:3,  total:3,  last:'2026-08-24'},
-  {city:'廊坊',  name:'三河燕郊福合第一医院',                          yh:1,  bao:0,  pg:0,  total:1,  last:'2026-08-17', notIn3:true},
+  {city:'廊坊',  name:'三河燕郊福合第一医院',                          yh:2,  bao:0,  pg:0,  total:2,  last:'2026-09-11', notIn3:true, yhNew:1},
   {city:'廊坊',  name:'廊坊市人民医院',                                yh:0,  bao:0,  pg:3,  total:3,  last:'2026-08-27'},
   {city:'廊坊',  name:'廊坊市第四人民医院',                            yh:0,  bao:6,  pg:0,  total:6,  last:'2026-09-09', baoNew:1},
   {city:'廊坊',  name:'京东中美医院',                                  yh:0,  bao:0,  pg:1,  total:1,  last:'2026-08-24'},
@@ -784,8 +784,8 @@ const COMPETITIVE = [
    risk:'low', note:'多品牌并采，颐合恒瑞4笔 > 鹏冠3笔，颐合领先，持续跟进'},
   // ── 低风险：有颐合恒瑞，颐合占优 ──
   {city:'邯郸',   name:'磁县中医院',                   grade:'C', status:'正常使用',
-   yh:2, baoSpec:'1克', baoCnt:1, pgSpec:'', pgCnt:0,
-   risk:'low', note:'多品牌并采，颐合恒瑞2笔 > 佰傲1笔，颐合领先，推动继续扩大份额'},
+   yh:3, baoSpec:'1克', baoCnt:1, pgSpec:'', pgCnt:0,
+   risk:'low', note:'多品牌并采，颐合恒瑞3笔 > 佰傲1笔，颐合领先，推动继续扩大份额'},
   {city:'石家庄', name:'河北省胸科医院',               grade:'B', status:'正常使用',
    yh:2, baoSpec:'2克', baoCnt:1, pgSpec:'', pgCnt:0,
    risk:'low', note:'多品牌并采，颐合恒瑞2笔 > 佰傲1笔，颐合占优，持续保持份额'},
@@ -850,7 +850,7 @@ new Chart(document.getElementById('cComp'),{
       '燕达医院\n(B)'
     ],
     datasets:[
-      {label:'颐合恒瑞', data:[0, 0, 0, 0, 0, 1, 4, 2, 28, 4, 4, 2, 2, 6], backgroundColor:'#4e79a7', borderRadius:3, stack:'s'},
+      {label:'颐合恒瑞', data:[0, 0, 0, 0, 0, 1, 4, 2, 28, 4, 4, 3, 2, 6], backgroundColor:'#4e79a7', borderRadius:3, stack:'s'},
       {label:'佰傲',     data:[7, 5, 4, 0, 0, 9, 5,  0,  0, 5, 0, 1, 1, 0], backgroundColor:'#f28e2b', borderRadius:3, stack:'s'},
       {label:'鹏冠',     data:[0, 0, 1, 2, 1, 1, 0,  4, 20, 0, 3, 0, 0, 2], backgroundColor:'#59a14f', borderRadius:3, stack:'s'},
     ]
@@ -960,7 +960,7 @@ new Chart(document.getElementById('cSpec'),{
     ],
     datasets:[{
       label:'采购笔数',
-      data:[74, 59, 81, 42, 32, 3, 3, 33, 25, 1],
+      data:[76, 62, 81, 42, 32, 3, 3, 33, 25, 1],
       backgroundColor:[
         colors.yh,'#7fa8c7',
         colors.bao,'#f5aa55','#f8c87c','#fad9a0','#fceacc',
@@ -995,10 +995,10 @@ new Chart(document.getElementById('cSpec'),{
 new Chart(document.getElementById('cFreq'),{
   type:'bar',
   data:{
-    labels:['1笔\n(21家)','2笔\n(13家)','3-7笔\n(6家)','≥8笔\n(3家)'],
+    labels:['1笔\n(20家)','2笔\n(12家)','3-7笔\n(8家)','≥8笔\n(3家)'],
     datasets:[{
       label:'医院数',
-      data:[21, 13, 6, 3],
+      data:[20, 12, 8, 3],
       backgroundColor:['#90b8d8','#6fa0c7','#4e79a7','#e15759'],
       borderRadius:6
     }]
@@ -1014,8 +1014,8 @@ new Chart(document.getElementById('cFreq'),{
             const notes=[
               '',
               '',
-              '燕达(6笔)·医科大四(6笔)·保二院(4笔)·联勤九八〇(4笔)·邢台信都区(4笔)·武安仁慈(3笔)',
-              '医科大二(28笔)·河间(17笔)·怀来(14笔)'
+              '燕达(6笔)·医科大四(6笔)·保二院(4笔)·联勤九八〇(4笔)·邢台信都区(4笔)·武安仁慈(3笔)·张家口下花园(3笔)·磁县中医院(3笔)',
+              '医科大二(28笔)·河间(19笔)·怀来(14笔)'
             ];
             return notes[ctx.dataIndex]||'';
           }
