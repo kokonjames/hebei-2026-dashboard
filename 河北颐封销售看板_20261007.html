@@ -136,8 +136,8 @@ tr:hover td{background:rgba(88,166,255,.04)}
   </div>
   <div class="kpi-card purple">
     <div class="kpi-label">月度采购趋势</div>
-    <div class="kpi-value" id="kv-aug">—<span class="kpi-unit">个</span></div>
-    <div class="kpi-sub">10月 · 9月 <span id="ks-jul" style="color:#a78bfa">—</span>个</div>
+    <div class="kpi-value" id="kv-aug">—<span class="kpi-unit">克</span></div>
+    <div class="kpi-sub">10月 · 9月 <span id="ks-jul" style="color:#a78bfa">—</span>克</div>
   </div>
   <div class="kpi-card red">
     <div class="kpi-label">待推进医院</div>
@@ -269,8 +269,17 @@ document.getElementById('ks-chain-hosp').textContent= KPI.total_g.toLocaleString
 document.getElementById('kv-subtotal').innerHTML  = KPI.subtotal+'<span class="kpi-unit">个</span>';
 document.getElementById('ks-q1g').textContent     = KPI.q1g;
 document.getElementById('ks-q2g').textContent     = KPI.q2g;
-document.getElementById('kv-aug').innerHTML       = KPI.oct+'<span class="kpi-unit">个</span>';
-document.getElementById('ks-jul').textContent     = KPI.sep;
+// 月度克数：按每家医院规格比例（total_g/subtotal）换算
+let _octG=0, _sepG=0;
+DATA.forEach(r => {
+  if (!r.subtotal) return;
+  const ag = r.total_g / r.subtotal;
+  _octG += (r.oct||0) * ag;
+  _sepG += (r.sep||0) * ag;
+});
+_octG = Math.round(_octG); _sepG = Math.round(_sepG);
+document.getElementById('kv-aug').innerHTML       = _octG.toLocaleString()+'<span class="kpi-unit">克</span>';
+document.getElementById('ks-jul').textContent     = _sepG.toLocaleString();
 document.getElementById('kv-nopurchase').innerHTML= (KPI.total-KPI.purchased)+'<span class="kpi-unit">家</span>';
 document.getElementById('ks-nolink').textContent  = '报量 '+KPI.pend_y+'家 · 二次开发 '+KPI.pend_n+'家';
 
