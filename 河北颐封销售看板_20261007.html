@@ -112,6 +112,13 @@ tr:hover td{background:rgba(88,166,255,.04)}
 
 <!-- ═══ KPI ═══ -->
 <div class="kpi-grid">
+  <div class="kpi-card orange">
+    <div class="kpi-label">供应链全链路（克）</div>
+    <div class="kpi-value" id="kv-ship">—<span class="kpi-unit">克</span></div>
+    <div class="kpi-sub">ABW1003 <span id="ks-abw1" style="color:#fb923c">—</span>克 · ABW2003 <span id="ks-abw2" style="color:#fb923c">—</span>克</div>
+    <div class="kpi-sub" style="margin-top:4px">↓ 省代→代理商 <span id="ks-chain-dist" style="color:#fbbf24;font-weight:600">—</span>克</div>
+    <div class="kpi-sub">↓ 代理商→医院 <span id="ks-chain-hosp" style="color:#fbbf24;font-weight:600">—</span>克</div>
+  </div>
   <div class="kpi-card blue">
     <div class="kpi-label">覆盖医院总数</div>
     <div class="kpi-value" id="kv-total">—<span class="kpi-unit">家</span></div>
@@ -121,13 +128,6 @@ tr:hover td{background:rgba(88,166,255,.04)}
     <div class="kpi-label">已采购医院</div>
     <div class="kpi-value" id="kv-purchased">—<span class="kpi-unit">家</span></div>
     <div class="kpi-sub" id="ks-purchased-pct">报量 —家 · 二次开发 —家</div>
-  </div>
-  <div class="kpi-card orange">
-    <div class="kpi-label">供应链全链路（克）</div>
-    <div class="kpi-value" id="kv-ship">—<span class="kpi-unit">克</span></div>
-    <div class="kpi-sub">ABW1003 <span id="ks-abw1" style="color:#fb923c">—</span>克 · ABW2003 <span id="ks-abw2" style="color:#fb923c">—</span>克</div>
-    <div class="kpi-sub" style="margin-top:4px">↓ 省代→代理商 <span id="ks-chain-dist" style="color:#fbbf24;font-weight:600">—</span>克</div>
-    <div class="kpi-sub">↓ 代理商→医院 <span id="ks-chain-hosp" style="color:#fbbf24;font-weight:600">—</span>克</div>
   </div>
   <div class="kpi-card teal">
     <div class="kpi-label">平台采购总量</div>
