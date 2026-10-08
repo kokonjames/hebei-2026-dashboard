@@ -131,8 +131,8 @@ tr:hover td{background:rgba(88,166,255,.04)}
   </div>
   <div class="kpi-card teal">
     <div class="kpi-label">平台采购总量</div>
-    <div class="kpi-value" id="kv-subtotal">—<span class="kpi-unit">个</span></div>
-    <div class="kpi-sub">1克 <span id="ks-q1g" style="color:#2dd4bf">—</span>个 · 2克 <span id="ks-q2g" style="color:#2dd4bf">—</span>个</div>
+    <div class="kpi-value" id="kv-subtotal">—<span class="kpi-unit">片</span></div>
+    <div class="kpi-sub">1克 <span id="ks-q1g" style="color:#2dd4bf">—</span>片 · 2克 <span id="ks-q2g" style="color:#2dd4bf">—</span>片</div>
   </div>
   <div class="kpi-card purple">
     <div class="kpi-label">月度采购趋势</div>
@@ -266,7 +266,7 @@ document.getElementById('ks-abw1').textContent      = KPI.proc_abw1.toLocaleStri
 document.getElementById('ks-abw2').textContent      = KPI.proc_abw2.toLocaleString();
 document.getElementById('ks-chain-dist').textContent= KPI.ship_g.toLocaleString();
 document.getElementById('ks-chain-hosp').textContent= KPI.total_g.toLocaleString();
-document.getElementById('kv-subtotal').innerHTML  = KPI.subtotal+'<span class="kpi-unit">个</span>';
+document.getElementById('kv-subtotal').innerHTML  = KPI.subtotal+'<span class="kpi-unit">片</span>';
 document.getElementById('ks-q1g').textContent     = KPI.q1g;
 document.getElementById('ks-q2g').textContent     = KPI.q2g;
 // 月度克数：按每家医院规格比例（total_g/subtotal）换算
