@@ -230,8 +230,10 @@ tr:hover td{background:rgba(88,166,255,.04)}
           <th data-col="linked">勾量</th>
           <th data-col="status">当前状态</th>
           <th data-col="ship_g" class="num-cell">代理商进货(克)</th>
+          <th data-col="jul" class="num-cell">7月(个)</th>
           <th data-col="aug_col" class="num-cell">8月(个)</th>
           <th data-col="sep" class="num-cell">9月(个)</th>
+          <th data-col="oct" class="num-cell">10月(个)</th>
           <th data-col="q1g" class="num-cell">1克(个)</th>
           <th data-col="q2g" class="num-cell">2克(个)</th>
           <th data-col="total_g" class="num-cell">总克数</th>
@@ -486,8 +488,10 @@ function renderTable(data){
       <td class="${r.linked==='否'?'linked-no':''} ">${r.linked}</td>
       <td class="${statusClass(r.status)}">${r.status}</td>
       ${numCell(r.ship_g)}
+      ${numCell(r.jul)}
       ${numCell(r.aug)}
-      ${numCell(r.sep), numCell(r.oct)}
+      ${numCell(r.sep)}
+      ${numCell(r.oct)}
       ${numCell(r.q1g)}
       ${numCell(r.q2g)}
       <td class="num-cell ${r.total_g?'total-g-cell':'num-zero'}">${r.total_g||'—'}${bar}</td>
