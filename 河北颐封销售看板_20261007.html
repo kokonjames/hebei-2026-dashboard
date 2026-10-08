@@ -123,9 +123,11 @@ tr:hover td{background:rgba(88,166,255,.04)}
     <div class="kpi-sub" id="ks-purchased-pct">报量 —家 · 二次开发 —家</div>
   </div>
   <div class="kpi-card orange">
-    <div class="kpi-label">法显进货（厂家→省代）</div>
+    <div class="kpi-label">供应链全链路（克）</div>
     <div class="kpi-value" id="kv-ship">—<span class="kpi-unit">克</span></div>
     <div class="kpi-sub">ABW1003 <span id="ks-abw1" style="color:#fb923c">—</span>克 · ABW2003 <span id="ks-abw2" style="color:#fb923c">—</span>克</div>
+    <div class="kpi-sub" style="margin-top:4px">↓ 省代→代理商 <span id="ks-chain-dist" style="color:#fbbf24;font-weight:600">—</span>克</div>
+    <div class="kpi-sub">↓ 代理商→医院 <span id="ks-chain-hosp" style="color:#fbbf24;font-weight:600">—</span>克</div>
   </div>
   <div class="kpi-card teal">
     <div class="kpi-label">平台采购总量</div>
@@ -259,9 +261,11 @@ document.getElementById('kv-total').innerHTML     = KPI.total+'<span class="kpi-
 document.getElementById('ks-grade').textContent   = '报量 '+KPI.linked_y+'家 · 二次开发 '+KPI.linked_n+'家';
 document.getElementById('kv-purchased').innerHTML = KPI.purchased+'<span class="kpi-unit">家</span>';
 document.getElementById('ks-purchased-pct').textContent = '报量 '+KPI.purch_y+'家 · 二次开发 '+KPI.purch_n+'家';
-document.getElementById('kv-ship').innerHTML      = KPI.proc_g.toLocaleString()+'<span class="kpi-unit">克</span>';
-document.getElementById('ks-abw1').textContent    = KPI.proc_abw1.toLocaleString();
-document.getElementById('ks-abw2').textContent    = KPI.proc_abw2.toLocaleString();
+document.getElementById('kv-ship').innerHTML        = KPI.proc_g.toLocaleString()+'<span class="kpi-unit">克</span>';
+document.getElementById('ks-abw1').textContent      = KPI.proc_abw1.toLocaleString();
+document.getElementById('ks-abw2').textContent      = KPI.proc_abw2.toLocaleString();
+document.getElementById('ks-chain-dist').textContent= KPI.ship_g.toLocaleString();
+document.getElementById('ks-chain-hosp').textContent= KPI.total_g.toLocaleString();
 document.getElementById('kv-subtotal').innerHTML  = KPI.subtotal+'<span class="kpi-unit">个</span>';
 document.getElementById('ks-q1g').textContent     = KPI.q1g;
 document.getElementById('ks-q2g').textContent     = KPI.q2g;
