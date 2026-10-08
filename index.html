@@ -3,1110 +3,548 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>可吸收骨蜡（颐封）河北2026采购数据看板</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<title>颐封可吸收骨蜡·河北省销售看板·2026-09-04</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",Arial,sans-serif;background:#eef1f6;color:#333;min-width:960px}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#0d1117;color:#c9d1d9;min-height:100vh}
 
-/* ── Header ── */
-.hd{background:linear-gradient(135deg,#1a3a5c 0%,#2a6496 100%);color:#fff;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 3px 12px rgba(0,0,0,.25)}
-.hd-title{font-size:21px;font-weight:700;letter-spacing:.5px}
-.hd-sub{font-size:12px;opacity:.75;margin-top:4px}
-.hd-date{font-size:13px;opacity:.7;white-space:nowrap}
+/* ─── header ─── */
+.header{background:linear-gradient(135deg,#1a2744 0%,#0d1b35 60%,#1a1a2e 100%);padding:20px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #30363d;box-shadow:0 2px 20px rgba(0,0,0,.5)}
+.header-left h1{font-size:22px;font-weight:700;color:#e6edf3;letter-spacing:.5px}
+.header-left .sub{font-size:12px;color:#8b949e;margin-top:4px}
+.header-right{display:flex;gap:12px;align-items:center}
+.badge{background:#21262d;border:1px solid #30363d;border-radius:20px;padding:6px 14px;font-size:12px;color:#8b949e}
+.badge span{color:#58a6ff;font-weight:600}
 
-/* ── Layout ── */
-.wrap{max-width:1440px;margin:0 auto;padding:24px 28px}
+/* ─── kpi grid ─── */
+.kpi-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;padding:20px 32px}
+.kpi-card{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:16px 18px;position:relative;overflow:hidden;transition:transform .2s}
+.kpi-card:hover{transform:translateY(-2px)}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.kpi-card.blue::before{background:linear-gradient(90deg,#1f6feb,#388bfd)}
+.kpi-card.green::before{background:linear-gradient(90deg,#238636,#3fb950)}
+.kpi-card.orange::before{background:linear-gradient(90deg,#d29922,#e3b341)}
+.kpi-card.red::before{background:linear-gradient(90deg,#da3633,#f85149)}
+.kpi-card.purple::before{background:linear-gradient(90deg,#8b5cf6,#a78bfa)}
+.kpi-card.teal::before{background:linear-gradient(90deg,#0e9488,#14b8a6)}
+.kpi-label{font-size:11px;color:#8b949e;margin-bottom:8px;letter-spacing:.3px}
+.kpi-value{font-size:28px;font-weight:700;line-height:1}
+.kpi-card.blue .kpi-value{color:#58a6ff}
+.kpi-card.green .kpi-value{color:#3fb950}
+.kpi-card.orange .kpi-value{color:#e3b341}
+.kpi-card.red .kpi-value{color:#f85149}
+.kpi-card.purple .kpi-value{color:#a78bfa}
+.kpi-card.teal .kpi-value{color:#2dd4bf}
+.kpi-unit{font-size:13px;font-weight:400;margin-left:2px;opacity:.7}
+.kpi-sub{font-size:11px;color:#6e7681;margin-top:6px}
 
-/* ── KPI Cards ── */
-.kpi-row{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-bottom:24px}
-.kpi{background:#fff;border-radius:10px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,.07);border-top:4px solid #4e79a7;position:relative;overflow:hidden}
-.kpi::after{content:'';position:absolute;right:-10px;top:-10px;width:60px;height:60px;border-radius:50%;opacity:.06;background:currentColor}
-.kpi.c1{border-top-color:#4e79a7}
-.kpi.c2{border-top-color:#2d9cdb}
-.kpi.c3{border-top-color:#2a6496}
-.kpi.c4{border-top-color:#2a6496}
-.kpi.c5{border-top-color:#e15759}
-.kpi.c6{border-top-color:#b07aa1}
-.kpi-lbl{font-size:11px;color:#888;margin-bottom:8px;font-weight:500;text-transform:uppercase;letter-spacing:.4px}
-.kpi-val{font-size:30px;font-weight:800;color:#1a3a5c;line-height:1}
-.kpi-sub{font-size:11px;color:#aaa;margin-top:6px}
+/* ─── section ─── */
+.section{padding:0 32px 20px}
+.section-title{font-size:14px;font-weight:600;color:#8b949e;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.section-title::before{content:'';width:3px;height:14px;background:#1f6feb;border-radius:2px;display:block}
 
-/* ── Chart grid ── */
-.chart-row{display:grid;gap:18px;margin-bottom:20px}
-.cr3{grid-template-columns:1fr 1fr 1.6fr}
-.cr2{grid-template-columns:1fr 1fr}
-.chart-box{background:#fff;border-radius:10px;padding:20px 22px;box-shadow:0 2px 8px rgba(0,0,0,.07)}
-.chart-ttl{font-size:13px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #eef1f6;padding-bottom:10px;margin-bottom:14px}
-.chart-wrap{position:relative}
+/* ─── chart grid ─── */
+.chart-grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px}
+.chart-grid-3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:14px}
+.chart-box{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:16px}
+.chart-title{font-size:12px;color:#8b949e;font-weight:600;margin-bottom:10px;letter-spacing:.3px}
+.chart-area{width:100%}
 
-/* ── Sections ── */
-.section{background:#fff;border-radius:10px;padding:22px 26px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:20px}
-.sec-ttl{font-size:15px;font-weight:700;color:#1a3a5c;margin-bottom:16px;display:flex;align-items:center;gap:9px}
-.sec-ttl::before{content:'';flex-shrink:0;display:inline-block;width:4px;height:20px;background:linear-gradient(180deg,#2a6496,#4e79a7);border-radius:2px}
+/* ─── filter bar ─── */
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.filter-bar select, .filter-bar input{background:#161b22;border:1px solid #30363d;border-radius:6px;color:#c9d1d9;padding:6px 12px;font-size:12px;outline:none}
+.filter-bar select:focus, .filter-bar input:focus{border-color:#58a6ff}
+.filter-bar label{font-size:12px;color:#8b949e}
+.filter-count{font-size:12px;color:#58a6ff;margin-left:auto;font-weight:600}
 
-/* ── Tabs ── */
-.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-.tab{padding:5px 13px;border-radius:20px;font-size:12px;cursor:pointer;border:1px solid #d0d7e0;background:#f5f7fb;color:#555;transition:all .18s;user-select:none}
-.tab.active{background:#2a6496;color:#fff;border-color:#2a6496}
-.tab:hover:not(.active){background:#e4ebf5}
-
-/* ── Tables ── */
-.tbl-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{background:#f4f6f9;color:#444;font-weight:600;padding:9px 11px;text-align:left;border-bottom:2px solid #dde3ea;white-space:nowrap;font-size:12px}
-td{padding:8px 11px;border-bottom:1px solid #f2f2f2;vertical-align:middle}
-tr:hover td{background:#f8fafc}
+/* ─── table ─── */
+.table-wrap{background:#161b22;border:1px solid #30363d;border-radius:10px;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead tr{background:#21262d}
+th{padding:10px 12px;text-align:left;color:#8b949e;font-weight:600;border-bottom:1px solid #30363d;white-space:nowrap;cursor:pointer;user-select:none}
+th:hover{color:#c9d1d9}
+th .sort-icon{opacity:.4;margin-left:4px}
+td{padding:9px 12px;border-bottom:1px solid #21262d;vertical-align:middle}
 tr:last-child td{border-bottom:none}
-.city-row td{background:#edf2fa;color:#2a6496;font-weight:700;font-size:12px;padding:5px 11px}
+tr:hover td{background:rgba(88,166,255,.04)}
+.grade-A{background:#da3633;color:#fff;border-radius:4px;padding:2px 7px;font-weight:700;font-size:11px;display:inline-block}
+.grade-B{background:#d29922;color:#000;border-radius:4px;padding:2px 7px;font-weight:700;font-size:11px;display:inline-block}
+.grade-C{background:#30363d;color:#8b949e;border-radius:4px;padding:2px 7px;font-size:11px;display:inline-block}
+.grade-empty{background:#21262d;color:#6e7681;border-radius:4px;padding:2px 7px;font-size:11px;display:inline-block}
+.status-normal{color:#3fb950;font-weight:600}
+.status-wait{color:#e3b341}
+.status-submit{color:#58a6ff}
+.status-other{color:#8b949e}
+.linked-no{color:#f85149;font-weight:600}
+.src-both{color:#3fb950}
+.src-yuebao{color:#8b949e}
+.src-828{color:#58a6ff}
+.num-cell{text-align:right;font-variant-numeric:tabular-nums;font-family:monospace}
+.num-zero{color:#3d444d}
+.num-pos{color:#c9d1d9}
+.total-g-cell{color:#58a6ff;font-weight:600}
+.bar-inline{display:inline-block;height:6px;background:#1f6feb;border-radius:3px;margin-left:6px;vertical-align:middle;min-width:2px}
 
-/* ── Badges ── */
-.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;white-space:nowrap}
-.bg-yh{background:#deeaf7;color:#1d5f9e}
-.bg-bao{background:#fef0dc;color:#c26a00}
-.bg-pg{background:#e4f3e4;color:#276d27}
-.bg-A{background:#fde;color:#b92020;border:1px solid #f5b8b8}
-.bg-B{background:#fef5e4;color:#c07a00;border:1px solid #f5d8a0}
-.bg-C{background:#e8f1fc;color:#2060a0;border:1px solid #b8d0ee}
+/* ─── legend ─── */
+.legend-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:#8b949e}
+.legend-dot{width:8px;height:8px;border-radius:50%}
 
-/* ── Status ── */
-.st-wait{background:#fff8e1;color:#7a5a00;font-size:11px;padding:2px 7px;border-radius:3px;border-left:3px solid #f5c518}
-.st-use{background:#e8f5e9;color:#1b5e1f;font-size:11px;padding:2px 7px;border-radius:3px;border-left:3px solid #43a047}
-.st-other{background:#fce4ec;color:#880e4f;font-size:11px;padding:2px 7px;border-radius:3px;border-left:3px solid #e91e63}
-
-/* ── Action ── */
-.ac-push{background:#fff3e0;color:#b44a00;font-size:11px;padding:2px 7px;border-radius:3px}
-.ac-proc{background:#e3f2fd;color:#0d47a1;font-size:11px;padding:2px 7px;border-radius:3px}
-.ac-meet{background:#e8f5e9;color:#1b5e1f;font-size:11px;padding:2px 7px;border-radius:3px}
-
-/* ── Bar mini ── */
-.bar-mini{display:flex;align-items:center;gap:7px}
-.bar-fill{height:7px;border-radius:4px;background:#4e79a7;flex-shrink:0}
-
-/* ── Rank circles ── */
-.rk{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:700;color:#fff}
-.rk-1{background:#f5a623}
-.rk-2{background:#9b9b9b}
-.rk-3{background:#a0522d}
-.rk-n{background:#4e79a7}
-
-/* ── Delivery highlight ── */
-.dv-yes{color:#1b5e1f;font-weight:700}
-
-/* ── Alert box ── */
-.alert{background:#fff8e1;border:1px solid #ffe082;border-left:4px solid #ffc107;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12.5px;color:#5a4000}
-.alert strong{font-size:13px;display:block;margin-bottom:4px}
-
-/* ── Summary line ── */
-.sum-line{display:flex;gap:24px;font-size:12px;color:#666;margin-bottom:14px}
-.sum-line b{color:#1a3a5c}
-
-/* ── Footer ── */
-.note{font-size:11px;color:#aaa;margin-top:10px;padding-top:8px;border-top:1px solid #f0f0f0}
-
-/* ── Grade legend ── */
-.grade-legend{background:#fff;border-radius:10px;padding:14px 24px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.grade-legend-title{font-size:12px;font-weight:700;color:#1a3a5c;margin-right:6px;white-space:nowrap}
-.grade-item{display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600;white-space:nowrap}
-.grade-4A{background:#4a1942;color:#fff}
-.grade-3A{background:#7b2d8b;color:#fff}
-.grade-2A{background:#c0392b;color:#fff}
-.grade-A{background:#e67e22;color:#fff}
-.grade-B{background:#7f8c8d;color:#fff}
-.grade-sep{width:1px;height:20px;background:#e0e4ea;margin:0 4px}
-/* ── Risk badges ── */
-.risk-high{background:#fde;color:#b92020;border:1px solid #f5b8b8;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:700}
-.risk-mid {background:#fef5e4;color:#c07a00;border:1px solid #f5d8a0;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:700}
-.risk-low {background:#e8f5e9;color:#276d27;border:1px solid #a5d6a7;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:700}
-/* ── Comp bars ── */
-.comp-bar{display:flex;gap:3px;align-items:center}
-.cb-yh{background:#4e79a7;height:10px;border-radius:2px}
-.cb-bao{background:#f28e2b;height:10px;border-radius:2px}
-.cb-pg{background:#59a14f;height:10px;border-radius:2px}
-.cb-lbl{font-size:11px;color:#888;white-space:nowrap}
-/* ── Scrollbar ── */
-::-webkit-scrollbar{height:5px;width:5px}
-::-webkit-scrollbar-track{background:#f0f2f5}
-::-webkit-scrollbar-thumb{background:#c0cad8;border-radius:3px}
-
-/* ── Weekly update summary ── */
-.weekly-update{background:linear-gradient(135deg,#fff8ef 0%,#fff3e0 100%);border:1px solid #ffe0b2;border-left:5px solid #f5a623;border-radius:12px;padding:16px 22px;margin-bottom:22px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
-.wu-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.wu-ttl{font-size:15px;font-weight:800;color:#b44a00}
-.wu-date{font-size:12px;color:#a9794a;margin-left:auto;background:#fff;border:1px solid #ffd9a0;border-radius:20px;padding:2px 12px}
-.wu-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.wu-item{background:#fff;border-radius:9px;padding:12px 14px;box-shadow:0 1px 4px rgba(0,0,0,.05);display:flex;flex-direction:column;gap:4px}
-.wu-num{font-size:24px;font-weight:800;line-height:1}
-.wu-num.up{color:#d92626}
-.wu-num.down{color:#1a9e4b}
-.wu-num.flat{color:#999}
-.wu-lbl{font-size:11px;color:#947a5a}
-.wu-extra{grid-column:1 / -1;font-size:12px;color:#7a5a2a;background:#fffaf0;border-radius:8px;padding:8px 12px;line-height:1.6}
-.wu-extra b{font-weight:700}
-.b-yh{color:#1d5f9e;font-weight:700}
-.b-bao{color:#c26a00;font-weight:700}
-.b-pg{color:#276d27;font-weight:700}
-.wu-item.yh{border-left:4px solid #2a6496}
-.wu-item.bao{border-left:4px solid #f28e2b}
-.wu-item.pg{border-left:4px solid #59a14f}
-
-/* ── KPI week delta ── */
-.kpi-delta{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;margin-top:9px;padding:2px 9px;border-radius:12px}
-.kpi-delta.up{background:#fdeaea;color:#d92626}
-.kpi-delta.down{background:#e8f7ee;color:#1a9e4b}
-.kpi-delta.flat{background:#f2f2f2;color:#999}
-.kpi-delta .arw{font-size:10px;margin-right:1px}
-
-/* ── New-this-week row highlight ── */
-tr.new-week td{background:#fffaf0!important}
-tr.new-week td:first-child{border-left:4px solid #f5a623!important}
-tr.new-week:hover td{background:#fff3df!important}
-.new-badge{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:700;background:#f5a623;color:#fff;vertical-align:middle}
-.dev2-badge{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:700;background:#9b59b6;color:#fff;vertical-align:middle;letter-spacing:.5px}
-
-/* ── Chart weekly caption ── */
-.chart-wk{font-size:12px;color:#b44a00;margin-top:8px;text-align:center;font-weight:600}
-
+/* ─── footer ─── */
+.footer{text-align:center;padding:20px;color:#3d444d;font-size:11px;border-top:1px solid #21262d;margin-top:20px}
 </style>
 </head>
 <body>
 
-<div class="hd">
-  <div>
-    <div class="hd-title">可吸收骨蜡（颐封）河北2026采购数据看板</div>
-    <div class="hd-sub">数据来源：河北省医疗器械集采平台 &nbsp;|&nbsp; 颐合恒瑞后台 ERP（订单明细） &nbsp;|&nbsp; 附件3报量医院跟进分析</div>
+<!-- ═══ HEADER ═══ -->
+<div class="header">
+  <div class="header-left">
+    <h1>颐封可吸收骨蜡 · 河北省销售看板</h1>
+    <div class="sub">数据来源：省代订货单（截至 2026-08-04）× 月度工作汇报（截至 2026-09-25）× 后台采购明细（截至 2026-10-07）</div>
   </div>
-  <div class="hd-date">数据截至 2026-09-11</div>
+  <div class="header-right">
+    <div class="badge">更新日期 <span>2026-10-07</span></div>
+    <div class="badge">省代→代理商 单位 <span>克</span></div>
+    <div class="badge">医院采购 单位 <span>个/克</span></div>
+  </div>
 </div>
 
-<div class="wrap">
-
-  <!-- ═══ 三品牌累计快报 ═══ -->
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-radius:12px;overflow:hidden;margin-bottom:18px;box-shadow:0 3px 14px rgba(0,0,0,.13)">
-    <!-- 颐合恒瑞 -->
-    <div style="background:linear-gradient(135deg,#1a3a5c 0%,#2a6496 100%);padding:20px 28px">
-      <div style="font-size:11px;color:rgba(255,255,255,.65);font-weight:600;letter-spacing:.5px;margin-bottom:14px">截至 2026-09-11 · 颐合恒瑞</div>
-      <div style="display:flex;gap:32px;align-items:flex-end">
-        <div>
-          <div style="font-size:40px;font-weight:900;color:#fff;line-height:1">43</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:5px">采购医院（家）</div>
-        </div>
-        <div style="width:1px;background:rgba(255,255,255,.18);align-self:stretch"></div>
-        <div>
-          <div style="font-size:40px;font-weight:900;color:#fff;line-height:1">140</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:5px">采购总笔数（笔）</div>
-        </div>
-      </div>
-    </div>
-    <!-- 佰傲 -->
-    <div style="background:linear-gradient(135deg,#8a3e00 0%,#d47520 100%);padding:20px 28px;border-left:1px solid rgba(255,255,255,.12)">
-      <div style="font-size:11px;color:rgba(255,255,255,.65);font-weight:600;letter-spacing:.5px;margin-bottom:14px">截至 2026-09-11 · 佰傲</div>
-      <div style="display:flex;gap:32px;align-items:flex-end">
-        <div>
-          <div style="font-size:40px;font-weight:900;color:#fff;line-height:1">33</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:5px">采购医院（家）</div>
-        </div>
-        <div style="width:1px;background:rgba(255,255,255,.18);align-self:stretch"></div>
-        <div>
-          <div style="font-size:40px;font-weight:900;color:#fff;line-height:1">167</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:5px">采购总笔数（笔）</div>
-        </div>
-      </div>
-    </div>
-    <!-- 鹏冠 -->
-    <div style="background:linear-gradient(135deg,#1a4a1a 0%,#3d8b35 100%);padding:20px 28px;border-left:1px solid rgba(255,255,255,.12)">
-      <div style="font-size:11px;color:rgba(255,255,255,.65);font-weight:600;letter-spacing:.5px;margin-bottom:14px">截至 2026-09-11 · 鹏冠</div>
-      <div style="display:flex;gap:32px;align-items:flex-end">
-        <div>
-          <div style="font-size:40px;font-weight:900;color:#fff;line-height:1">29</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:5px">采购医院（家）</div>
-        </div>
-        <div style="width:1px;background:rgba(255,255,255,.18);align-self:stretch"></div>
-        <div>
-          <div style="font-size:40px;font-weight:900;color:#fff;line-height:1">66</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:5px">采购总笔数（笔）</div>
-        </div>
-      </div>
-    </div>
+<!-- ═══ KPI ═══ -->
+<div class="kpi-grid">
+  <div class="kpi-card orange">
+    <div class="kpi-label">供应链全链路（克）</div>
+    <div class="kpi-value" id="kv-ship">—<span class="kpi-unit">克</span></div>
+    <div class="kpi-sub">ABW1003 <span id="ks-abw1" style="color:#fb923c">—</span>克 · ABW2003 <span id="ks-abw2" style="color:#fb923c">—</span>克</div>
+    <div class="kpi-sub" style="margin-top:4px">↓ 省代→代理商 <span id="ks-chain-dist" style="color:#fbbf24;font-weight:600">—</span>克</div>
+    <div class="kpi-sub">↓ 代理商→医院 <span id="ks-chain-hosp" style="color:#fbbf24;font-weight:600">—</span>克</div>
   </div>
+  <div class="kpi-card blue">
+    <div class="kpi-label">覆盖医院总数</div>
+    <div class="kpi-value" id="kv-total">—<span class="kpi-unit">家</span></div>
+    <div class="kpi-sub" id="ks-grade">报量 —家 · 二次开发 —家</div>
+  </div>
+  <div class="kpi-card green">
+    <div class="kpi-label">已采购医院</div>
+    <div class="kpi-value" id="kv-purchased">—<span class="kpi-unit">家</span></div>
+    <div class="kpi-sub" id="ks-purchased-pct">报量 —家 · 二次开发 —家</div>
+  </div>
+  <div class="kpi-card teal">
+    <div class="kpi-label">平台采购总量</div>
+    <div class="kpi-value" id="kv-subtotal">—<span class="kpi-unit">个</span></div>
+    <div class="kpi-sub">1克 <span id="ks-q1g" style="color:#2dd4bf">—</span>个 · 2克 <span id="ks-q2g" style="color:#2dd4bf">—</span>个</div>
+  </div>
+  <div class="kpi-card purple">
+    <div class="kpi-label">月度采购趋势</div>
+    <div class="kpi-value" id="kv-aug">—<span class="kpi-unit">个</span></div>
+    <div class="kpi-sub">10月 · 9月 <span id="ks-jul" style="color:#a78bfa">—</span>个</div>
+  </div>
+  <div class="kpi-card red">
+    <div class="kpi-label">待推进医院</div>
+    <div class="kpi-value" id="kv-nopurchase">—<span class="kpi-unit">家</span></div>
+    <div class="kpi-sub" id="ks-nolink">报量 —家 · 二次开发 —家</div>
+  </div>
+</div>
 
-  <!-- ═══ 三品牌对比图 ═══ -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px">
+<!-- ═══ CHARTS ROW 1 ═══ -->
+<div class="section">
+  <div class="section-title">数据概览</div>
+  <div class="chart-grid-3">
     <div class="chart-box">
-      <div class="chart-ttl">三品牌采购医院占比</div>
-      <div style="position:relative;height:250px"><canvas id="cTopPie"></canvas></div>
+      <div class="chart-title">各地市平台采购量（克）</div>
+      <div class="chart-area" id="chart-city-bar" style="height:220px"></div>
     </div>
     <div class="chart-box">
-      <div class="chart-ttl">三品牌采购笔数对比</div>
-      <div style="position:relative;height:220px"><canvas id="cTopBar"></canvas></div>
-    </div>
-  </div>
-
-  <!-- ═══ 本周更新摘要 ═══ -->
-  <div class="weekly-update">
-    <div class="wu-head">
-      <span class="wu-ttl">本周更新摘要</span>
-      <span class="wu-date" id="wuDate">2026-09-05 ～ 2026-09-11</span>
-    </div>
-    <div class="wu-grid">
-      <div class="wu-item"><span class="wu-num up">+12</span><span class="wu-lbl">本周新增采购医院（全平台去重）</span></div>
-      <div class="wu-item"><span class="wu-num up">+68</span><span class="wu-lbl">新增采购笔数（全平台）</span></div>
-      <div class="wu-item yh"><span class="wu-num" style="color:#1d5f9e">+8</span><span class="wu-lbl">新增颐合恒瑞医院</span></div>
-      <div class="wu-item yh"><span class="wu-num" style="color:#1d5f9e">+25</span><span class="wu-lbl">颐合笔数环比（+22%）</span></div>
-      <div class="wu-item bao"><span class="wu-num" style="color:#c26a00">+2</span><span class="wu-lbl">新增佰傲医院</span></div>
-      <div class="wu-item bao"><span class="wu-num" style="color:#c26a00">+21</span><span class="wu-lbl">佰傲笔数环比（+14%）</span></div>
-      <div class="wu-item pg"><span class="wu-num" style="color:#276d27">+4</span><span class="wu-lbl">新增鹏冠医院</span></div>
-      <div class="wu-item pg"><span class="wu-num" style="color:#276d27">+8</span><span class="wu-lbl">鹏冠笔数环比（+14%）</span></div>
-      <div class="wu-extra" id="wuExtra">
-        <b class="b-yh">颐合恒瑞：</b>新增8家采购医院（<b class="b-yh">临西县中医院</b>、<b class="b-yh">临西县第二人民医院</b>、<b class="b-yh">宁晋县中西医结合医院</b>、<b class="b-yh">平乡县中西医结合医院</b>、<b class="b-yh">沧州和平医院</b>、<b class="b-yh">辛集市中医院</b>、<b class="b-yh">邯郸华景医院</b>、<b class="b-yh">广安门医院保定医院</b>首次颐封采购）；存量增量：<b class="b-yh">河北医科大学第二医院</b> +9笔（→28笔）、<b class="b-yh">河间市人民医院</b> +3笔（→19笔）、<b class="b-yh">怀来县医院</b> +1笔（→14笔）、<b class="b-yh">河北燕达医院</b> +1笔（→6笔）。<br>
-        <b class="b-bao">佰傲：</b>新增2家（<b class="b-bao">望都县医院</b> 1笔·1克、<b class="b-bao">石家庄市鹿泉区中医院</b> 1笔·1克）；存量增量最大：<b class="b-bao">河北医科大学第一医院</b> +6笔（→74笔）、保定市第一中心医院 +1笔（→9笔）、廊坊市第四人民医院 +1笔（→6笔）、中国人民解放军陆军第八十二集团军医院 +3笔（→6笔）。<br>
-        <b class="b-pg">鹏冠：</b>新增4家（<b class="b-pg">沙河市人民医院</b>、<b class="b-pg">邢台市襄都区中心医院</b>·0.5克、<b class="b-pg">通用环球中煤岭北医院</b>·2克、<b class="b-pg">华北医疗健康集团峰峰总医院</b>·0.5克）；存量增量：<b class="b-pg">河北医科大学第二医院</b> +1笔（→20笔）、邯郸市中医院 +1笔（→2笔）、平山县人民医院 +1笔（→2笔）。
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══ Chart Row 2 ═══ -->
-  <div class="chart-row cr2">
-    <div class="chart-box">
-      <div class="chart-ttl">各规格型号采购分布（笔数）</div>
-      <div class="chart-wrap" style="height:240px"><canvas id="cSpec"></canvas></div>
+      <div class="chart-title">医院级别分布</div>
+      <div class="chart-area" id="chart-grade" style="height:220px"></div>
     </div>
     <div class="chart-box">
-      <div class="chart-ttl">颐合恒瑞医院采购频次分布</div>
-      <div class="chart-wrap" style="height:240px"><canvas id="cFreq"></canvas></div>
+      <div class="chart-title">规格占比（采购总克数）</div>
+      <div class="chart-area" id="chart-spec" style="height:220px"></div>
     </div>
   </div>
+</div>
 
-  <!-- ═══ 规格覆盖分析 ═══ -->
-  <div class="section">
-    <div class="sec-ttl">各厂家规格医院覆盖分析</div>
-    <div class="sum-line">
-      <span>颐合恒瑞：<b>2种规格</b>（1克 / 2克）覆盖 43家医院</span>
-      <span>佰傲：<b>5种规格</b>（0.5–2.5克）覆盖 33家医院</span>
-      <span>鹏冠：<b>4种规格</b>（0.5克 / 1克 / 2克 / 3克）覆盖 29家医院</span>
+<!-- ═══ CHARTS ROW 2 ═══ -->
+<div class="section">
+  <div class="chart-grid-4">
+    <div class="chart-box" style="grid-column:span 2">
+      <div class="chart-title">9月 vs 10月 各地市采购对比（克）</div>
+      <div class="chart-area" id="chart-monthly" style="height:200px"></div>
     </div>
-
-    <!-- 规格覆盖对比图 -->
-    <div class="chart-box" style="margin-bottom:20px">
-      <div class="chart-ttl">各规格医院覆盖数对比（注：同一医院可能同时购买多种规格）</div>
-      <div style="position:relative;height:200px"><canvas id="cSpecCov"></canvas></div>
+    <div class="chart-box">
+      <div class="chart-title">医院状态分布</div>
+      <div class="chart-area" id="chart-status" style="height:200px"></div>
     </div>
-
-    <!-- 三厂家规格组合明细 -->
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
-
-      <!-- 颐合恒瑞 -->
-      <div style="background:#f4f8fd;border-radius:8px;padding:16px;border-top:3px solid #4e79a7">
-        <div style="font-weight:700;color:#1d5f9e;margin-bottom:12px;font-size:13px">
-          颐合恒瑞 &nbsp;<span style="font-weight:400;color:#888">43家医院 · 2种规格</span>
-        </div>
-        <table style="width:100%;border-collapse:collapse;font-size:12px">
-          <thead><tr>
-            <th style="background:#deeaf7;padding:6px 8px;text-align:left;color:#1d5f9e;border-bottom:1px solid #c5d8ef">规格组合</th>
-            <th style="background:#deeaf7;padding:6px 8px;text-align:center;color:#1d5f9e;border-bottom:1px solid #c5d8ef">医院数</th>
-            <th style="background:#deeaf7;padding:6px 8px;text-align:left;color:#1d5f9e;border-bottom:1px solid #c5d8ef">医院名称</th>
-          </tr></thead>
-          <tbody id="specTbYH"></tbody>
-        </table>
-        <div style="margin-top:10px;font-size:11px;color:#888">
-          1克覆盖：<b style="color:#1d5f9e">29家</b> &nbsp;|&nbsp; 2克覆盖：<b style="color:#1d5f9e">20家</b>
-        </div>
-      </div>
-
-      <!-- 佰傲 -->
-      <div style="background:#fef8f0;border-radius:8px;padding:16px;border-top:3px solid #f28e2b">
-        <div style="font-weight:700;color:#c26a00;margin-bottom:12px;font-size:13px">
-          佰傲 &nbsp;<span style="font-weight:400;color:#888">33家医院 · 5种规格</span>
-        </div>
-        <table style="width:100%;border-collapse:collapse;font-size:12px">
-          <thead><tr>
-            <th style="background:#fde8c5;padding:6px 8px;text-align:left;color:#c26a00;border-bottom:1px solid #f5cfa0">规格组合</th>
-            <th style="background:#fde8c5;padding:6px 8px;text-align:center;color:#c26a00;border-bottom:1px solid #f5cfa0">医院数</th>
-            <th style="background:#fde8c5;padding:6px 8px;text-align:left;color:#c26a00;border-bottom:1px solid #f5cfa0">医院名称</th>
-          </tr></thead>
-          <tbody id="specTbBao"></tbody>
-        </table>
-        <div style="margin-top:10px;font-size:11px;color:#888">
-          0.5克:<b style="color:#c26a00">2家</b> &nbsp;1克:<b style="color:#c26a00">20家</b> &nbsp;1.5克:<b style="color:#c26a00">3家</b> &nbsp;2克:<b style="color:#c26a00">8家</b> &nbsp;2.5克:<b style="color:#c26a00">11家</b>
-        </div>
-      </div>
-
-      <!-- 鹏冠 -->
-      <div style="background:#f2faf2;border-radius:8px;padding:16px;border-top:3px solid #59a14f">
-        <div style="font-weight:700;color:#276d27;margin-bottom:12px;font-size:13px">
-          鹏冠 &nbsp;<span style="font-weight:400;color:#888">29家医院 · 4种规格</span>
-        </div>
-        <table style="width:100%;border-collapse:collapse;font-size:12px">
-          <thead><tr>
-            <th style="background:#c8ebc8;padding:6px 8px;text-align:left;color:#276d27;border-bottom:1px solid #a5d6a5">规格组合</th>
-            <th style="background:#c8ebc8;padding:6px 8px;text-align:center;color:#276d27;border-bottom:1px solid #a5d6a5">医院数</th>
-            <th style="background:#c8ebc8;padding:6px 8px;text-align:left;color:#276d27;border-bottom:1px solid #a5d6a5">医院名称</th>
-          </tr></thead>
-          <tbody id="specTbPg"></tbody>
-        </table>
-        <div style="margin-top:10px;font-size:11px;color:#888">
-          0.5克覆盖：<b style="color:#276d27">5家</b> &nbsp;|&nbsp; 1克覆盖：<b style="color:#276d27">14家</b> &nbsp;|&nbsp; 2克覆盖：<b style="color:#276d27">9家</b>
-        </div>
-      </div>
-
-    </div><!-- /grid -->
+    <div class="chart-box">
+      <div class="chart-title">省代发货 vs 医院实采（克）Top城市</div>
+      <div class="chart-area" id="chart-chain" style="height:200px"></div>
+    </div>
   </div>
+</div>
 
-  <!-- ═══ 全平台采购医院总清单 ═══ -->
-  <div class="section">
-    <div class="sec-ttl">采购平台实际采购医院全清单（共77家 · 三家厂商合计）</div>
-    <div class="sum-line">
-      <span><span style="color:#1d5f9e;font-weight:700">★ 已采购颐合恒瑞</span>：<b>43家</b></span>
-      <span>仅采购竞品：<b>34家</b></span>
-      <span>多品牌并采：<b>14家</b></span>
-      <span>覆盖地市：<b>11个</b></span>
-    </div>
-    <div class="tabs" id="allHospTabs"></div>
-    <div class="tbl-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>地市</th>
-            <th>医院名称</th>
-            <th style="color:#1d5f9e">颐合恒瑞</th>
-            <th style="font-size:11px;color:#1d5f9e;opacity:.7;white-space:nowrap">本周新增</th>
-            <th style="color:#c26a00">佰傲</th>
-            <th style="font-size:11px;color:#c26a00;opacity:.7;white-space:nowrap">本周新增</th>
-            <th style="color:#276d27">鹏冠</th>
-            <th style="font-size:11px;color:#276d27;opacity:.7;white-space:nowrap">本周新增</th>
-            <th>合计笔数</th>
-            <th>最后采购</th>
-          </tr>
-        </thead>
-        <tbody id="tbAllHosp"></tbody>
-      </table>
-    </div>
-    <div class="note">★ 蓝色背景行表示已采购颐合恒瑞；合计笔数为三家厂商在该医院的采购记录总和。</div>
+<!-- ═══ WEEKLY CHART ═══ -->
+<div class="section">
+  <div class="section-title">每周新增克数</div>
+  <div class="chart-box">
+    <div class="chart-title">平台后台订单·每周采购量（克）· 数据来源：821/828/9-4 后台订单截图</div>
+    <div class="chart-area" id="chart-weekly" style="height:220px"></div>
   </div>
+</div>
 
-  <!-- ═══ 未采购医院清单 ═══ -->
-  <div class="section">
-    <div class="sec-ttl">已正式报量·尚无颐合恒瑞平台采购记录的医院（共<span id="unpurchasedCount">—</span>家）</div>
-
-    <div class="alert">
-      <strong>⚠ 重点关注：有线下发货记录但无平台采购记录的医院</strong>
-      沧县医院（120克）、崇礼区医院（72克）、矿务局总医院（60克）、邯郸市中医院（120克）、唐山市中医院（24克）、大城县医院（12克）、鸡泽县中医院（12克）——建议优先推动经销商在采购平台下单。
-    </div>
-
-    <div class="tabs" id="cityTabs"></div>
-    <div class="tbl-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>地市</th>
-            <th>医院名称</th>
-            <th>级别</th>
-            <th>当前状态</th>
-            <th>经销商</th>
-          </tr>
-        </thead>
-        <tbody id="tbUnpurchased"></tbody>
-      </table>
-    </div>
-    <div class="note">注：已正式报量医院共59家，其中22家已有颐合恒瑞平台采购记录，其余<span id="unpurchasedCount2">—</span>家尚未在平台采购颐合恒瑞（含已采购其他品牌的医院），是近期重点推动下单的目标。</div>
+<!-- ═══ TABLE ═══ -->
+<div class="section">
+  <div class="section-title">医院明细</div>
+  <div class="filter-bar">
+    <label>地市</label>
+    <select id="f-city"><option value="">全部</option></select>
+    <label>级别</label>
+    <select id="f-grade">
+      <option value="">全部</option>
+      <option value="A">A级（核心）</option>
+      <option value="B">B级（重点）</option>
+      <option value="C">C级（其他）</option>
+    </select>
+    <label>状态</label>
+    <select id="f-status">
+      <option value="">全部</option>
+      <option value="正常使用">正常使用</option>
+      <option value="办理手续等待送货">办理手续等待送货</option>
+    </select>
+    <label>采购</label>
+    <select id="f-purchase">
+      <option value="">全部</option>
+      <option value="yes">有采购记录</option>
+      <option value="no">无采购记录</option>
+    </select>
+    <input type="text" id="f-search" placeholder="搜索医院/代理商…" style="width:180px">
+    <div class="filter-count" id="filter-count"></div>
   </div>
-
-  <!-- ═══ 竞品采购分析 ═══ -->
-  <div class="section">
-    <div class="sec-ttl">附件3报量医院 — 同时存在佰傲 / 鹏冠采购记录（共14家）</div>
-
-    <div class="sum-line">
-      <span>仅采竞品，未采颐合恒瑞：<b style="color:#b92020">5家</b>（高/中风险）</span>
-      <span>多品牌并采（也买颐合恒瑞）：<b style="color:#c07a00">9家</b>（中/低风险）</span>
-      <span>涉及竞品总笔数：<b>佰傲34笔 / 鹏冠32笔</b></span>
-    </div>
-
-    <!-- 竞品对比图 -->
-    <div class="chart-box" style="margin-bottom:18px;padding:18px 22px">
-      <div class="chart-ttl">报量医院竞品 vs 颐合恒瑞 采购笔数对比</div>
-      <div style="position:relative;height:230px"><canvas id="cComp"></canvas></div>
-    </div>
-
-    <div class="tbl-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>地市</th>
-            <th>医院名称</th>
-            <th>级别</th>
-            <th>竞品品牌/规格/笔数</th>
-            <th>颐合恒瑞笔数</th>
-            <th>笔数占比（颐合 vs 竞品）</th>
-            <th>风险等级</th>
-            <th>分析与建议</th>
-          </tr>
-        </thead>
-        <tbody id="tbComp"></tbody>
-      </table>
-    </div>
-    <div class="note">注：竞品笔数指佰傲+鹏冠在采购平台上对该医院的合计采购记录数；颐合恒瑞笔数为该医院在附件3报量期间内的平台采购记录数。</div>
+  <div class="table-wrap">
+    <table id="main-table">
+      <thead>
+        <tr>
+          <th data-col="idx">#</th>
+          <th data-col="hospital">医院名称</th>
+          <th data-col="city">地市</th>
+          <th data-col="grade">级别</th>
+          <th data-col="agent">二级代理商</th>
+          <th data-col="linked">勾量</th>
+          <th data-col="status">当前状态</th>
+          <th data-col="ship_g" class="num-cell">代理商进货(克)</th>
+          <th data-col="jul" class="num-cell">7月(个)</th>
+          <th data-col="aug_col" class="num-cell">8月(个)</th>
+          <th data-col="sep" class="num-cell">9月(个)</th>
+          <th data-col="oct" class="num-cell">10月(个)</th>
+          <th data-col="q1g" class="num-cell">1克(个)</th>
+          <th data-col="q2g" class="num-cell">2克(个)</th>
+          <th data-col="total_g" class="num-cell">总克数</th>
+          <th data-col="last">最近采购</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
   </div>
+</div>
 
-</div><!-- /wrap -->
+<div class="footer">颐封可吸收骨蜡 · 河北省销售看板 · 2026-09-20 · 数据截至 2026-09-30 · 仅供内部决策参考</div>
 
+<!-- ═══ DATA + SCRIPT ═══ -->
 <script>
-// ── All hospitals data ──
-const ALL_HOSPITALS = [
-  // ── 石家庄（18家）──
-  {city:'石家庄',name:'河北医科大学第一医院',                          yh:0,  bao:74, pg:0,  total:74, last:'2026-09-08', baoNew:6},
-  {city:'石家庄',name:'河北医科大学第二医院',                          yh:28, bao:0,  pg:20, total:48, last:'2026-09-11', yhNew:9, pgNew:1},
-  {city:'石家庄',name:'河北医科大学第四医院',                          yh:6,  bao:0,  pg:0,  total:6,  last:'2026-08-31'},
-  {city:'石家庄',name:'中国人民解放军联勤保障部队第九八〇医院',         yh:4,  bao:5,  pg:0,  total:9,  last:'2026-09-11', yhNew:1},
-  {city:'石家庄',name:'华北医疗健康集团石家庄华北医院',                yh:0,  bao:2,  pg:2,  total:4,  last:'2026-08-07'},
-  {city:'石家庄',name:'石家庄市第三医院',                              yh:0,  bao:5,  pg:0,  total:5,  last:'2026-09-11', baoNew:1},
-  {city:'石家庄',name:'河北省胸科医院',                                yh:2,  bao:1,  pg:0,  total:3,  last:'2026-08-28'},
-  {city:'石家庄',name:'河北省中医院',                                  yh:1,  bao:0,  pg:0,  total:1,  last:'2026-08-07'},
-  {city:'石家庄',name:'平山县人民医院',                                yh:1,  bao:0,  pg:2,  total:3,  last:'2026-09-05', pgNew:1},
-  {city:'石家庄',name:'辛集市第一医院',                                yh:2,  bao:0,  pg:0,  total:2,  last:'2026-08-12'},
-  {city:'石家庄',name:'高邑县医院',                                    yh:2,  bao:0,  pg:0,  total:2,  last:'2026-08-26'},
-  {city:'石家庄',name:'河北省人民医院',                                yh:2,  bao:0,  pg:4,  total:6,  last:'2026-09-08', yhNew:1},
-  {city:'石家庄',name:'石家庄市鹿泉区铜冶镇中心卫生院永壁分院',       yh:0,  bao:1,  pg:0,  total:1,  last:'2026-08-12'},
-  {city:'石家庄',name:'新乐市中医医院',                                yh:0,  bao:0,  pg:1,  total:1,  last:'2026-08-24'},
-  {city:'石家庄',name:'石家庄市蒙城中西医结合医院',                    yh:0,  bao:0,  pg:1,  total:1,  last:'2026-08-28'},
-  {city:'石家庄',name:'石家庄长城中西医结合医院',                      yh:0,  bao:2,  pg:0,  total:2,  last:'2026-09-09', baoNew:1},
-  {city:'石家庄',name:'辛集市中医院',                                  yh:1,  bao:0,  pg:0,  total:1,  last:'2026-09-09', isNew:true, yhNew:1},
-  {city:'石家庄',name:'石家庄市鹿泉区中医院',                          yh:0,  bao:1,  pg:0,  total:1,  last:'2026-09-07', isNew:true, baoNew:1},
-  // ── 唐山（5家）──
-  {city:'唐山',  name:'唐山虹桥骨科医院',                              yh:1,  bao:0,  pg:0,  total:1,  last:'2026-07-29', notIn3:true},
-  {city:'唐山',  name:'滦南慈济中医医院',                              yh:1,  bao:0,  pg:0,  total:1,  last:'2026-08-14', notIn3:true},
-  {city:'唐山',  name:'唐山利康医院',                                  yh:0,  bao:0,  pg:1,  total:1,  last:'2026-08-11'},
-  {city:'唐山',  name:'唐山市中医医院',                                yh:1,  bao:0,  pg:0,  total:1,  last:'2026-08-31'},
-  {city:'唐山',  name:'滦州市人民医院',                                yh:2,  bao:0,  pg:0,  total:2,  last:'2026-09-08', yhNew:1},
-  // ── 保定（16家）──
-  {city:'保定',  name:'保定市第一中心医院',                            yh:1,  bao:9,  pg:1,  total:11, last:'2026-09-11', baoNew:1},
-  {city:'保定',  name:'保定市第二医院（老年医院）',                    yh:4,  bao:5,  pg:0,  total:9,  last:'2026-09-09', yhNew:2},
-  {city:'保定',  name:'保定市第二中心医院',                            yh:1,  bao:0,  pg:0,  total:1,  last:'2026-08-25'},
-  {city:'保定',  name:'定兴县医院',                                    yh:1,  bao:0,  pg:0,  total:1,  last:'2026-07-21'},
-  {city:'保定',  name:'保定第七医院',                                  yh:0,  bao:1,  pg:0,  total:1,  last:'2026-08-10'},
-  {city:'保定',  name:'定兴县计划生育局职工医院',                      yh:0,  bao:1,  pg:0,  total:1,  last:'2026-08-21'},
-  {city:'保定',  name:'保定高碑店保康医院',                            yh:0,  bao:1,  pg:0,  total:1,  last:'2026-08-24'},
-  {city:'保定',  name:'保定襄中手足外科医院',                          yh:0,  bao:0,  pg:3,  total:3,  last:'2026-08-27'},
-  {city:'保定',  name:'轩涿总医院（国药堂互联网医院）',                yh:0,  bao:0,  pg:1,  total:1,  last:'2026-08-14'},
-  {city:'保定',  name:'广安门医院保定医院',                            yh:1,  bao:0,  pg:1,  total:2,  last:'2026-09-09', isNew:true, yhNew:1},
-  {city:'保定',  name:'中国人民解放军陆军第八十二集团军医院',          yh:0,  bao:6,  pg:0,  total:6,  last:'2026-09-11', baoNew:3},
-  {city:'保定',  name:'容城县中医医院',                                yh:0,  bao:3,  pg:0,  total:3,  last:'2026-09-10', baoNew:1},
-  {city:'保定',  name:'安国市中医院',                                  yh:0,  bao:1,  pg:0,  total:1,  last:'2026-09-01'},
-  {city:'保定',  name:'涞水县医院',                                    yh:0,  bao:3,  pg:0,  total:3,  last:'2026-09-02', baoNew:2},
-  {city:'保定',  name:'望都县医院',                                    yh:0,  bao:1,  pg:0,  total:1,  last:'2026-09-10', isNew:true, baoNew:1},
-  // ── 沧州（2家）──
-  {city:'沧州',  name:'河间市人民医院',                                yh:19, bao:0,  pg:0,  total:19, last:'2026-09-11', yhNew:3},
-  {city:'沧州',  name:'沧州和平医院',                                  yh:1,  bao:0,  pg:0,  total:1,  last:'2026-09-09', isNew:true, yhNew:1},
-  // ── 邯郸（14家）──
-  {city:'邯郸',  name:'武安仁慈医院',                                  yh:3,  bao:0,  pg:0,  total:3,  last:'2026-08-10', notIn3:true},
-  {city:'邯郸',  name:'磁县肿瘤医院',                                  yh:0,  bao:7,  pg:0,  total:7,  last:'2026-09-10', baoNew:1},
-  {city:'邯郸',  name:'曲周县中医院',                                  yh:0,  bao:0,  pg:2,  total:2,  last:'2026-08-25'},
-  {city:'邯郸',  name:'磁县中医院',                                    yh:3,  bao:1,  pg:0,  total:4,  last:'2026-09-11', yhNew:2},
-  {city:'邯郸',  name:'磁县人民医院',                                  yh:1,  bao:0,  pg:0,  total:1,  last:'2026-08-04'},
-  {city:'邯郸',  name:'邯郸汇仁中医医院',                              yh:2,  bao:0,  pg:0,  total:2,  last:'2026-08-31'},
-  {city:'邯郸',  name:'邯郸市中医院',                                  yh:0,  bao:0,  pg:2,  total:2,  last:'2026-09-11', pgNew:1},
-  {city:'邯郸',  name:'邯郸市永年区第一医院',                          yh:2,  bao:0,  pg:0,  total:2,  last:'2026-09-02'},
-  {city:'邯郸',  name:'邯郸市人民医院',                                yh:1,  bao:0,  pg:0,  total:1,  last:'2026-09-04'},
-  {city:'邯郸',  name:'华北医疗健康集团峰峰总医院',                    yh:0,  bao:1,  pg:1,  total:2,  last:'2026-09-10', pgNew:1},
-  {city:'邯郸',  name:'邯郸市肥乡区中心医院',                          yh:0,  bao:2,  pg:0,  total:2,  last:'2026-09-05', baoNew:1},
-  {city:'邯郸',  name:'邯郸华景医院',                                  yh:2,  bao:0,  pg:0,  total:2,  last:'2026-09-10', isNew:true, yhNew:2},
-  // ── 邢台（13家）──
-  {city:'邢台',  name:'华北医疗健康集团邯台总医院骨科医院',            yh:0,  bao:7,  pg:0,  total:7,  last:'2026-07-25'},
-  {city:'邢台',  name:'邯台棋阳医院',                                  yh:0,  bao:3,  pg:0,  total:3,  last:'2026-08-18'},
-  {city:'邢台',  name:'邯台市南和区人民医院',                          yh:0,  bao:2,  pg:0,  total:2,  last:'2026-08-13'},
-  {city:'邢台',  name:'柏乡县中心医院',                                yh:0,  bao:4,  pg:1,  total:5,  last:'2026-09-04'},
-  {city:'邢台',  name:'邢台市任泽区人民医院',                          yh:0,  bao:2,  pg:0,  total:2,  last:'2026-09-09', baoNew:1},
-  {city:'邢台',  name:'邢台槐阳医院',                                  yh:0,  bao:2,  pg:0,  total:2,  last:'2026-09-11', baoNew:1},
-  {city:'邢台',  name:'邢台市信都区人民医院',                          yh:5,  bao:0,  pg:3,  total:8,  last:'2026-09-09', yhNew:2},
-  {city:'邢台',  name:'临西县中医院',                                  yh:1,  bao:0,  pg:0,  total:1,  last:'2026-09-07', isNew:true, yhNew:1},
-  {city:'邢台',  name:'临西县第二人民医院',                            yh:1,  bao:0,  pg:0,  total:1,  last:'2026-09-10', isNew:true, yhNew:1},
-  {city:'邢台',  name:'宁晋县中西医结合医院',                          yh:1,  bao:0,  pg:0,  total:1,  last:'2026-09-10', isNew:true, yhNew:1},
-  {city:'邢台',  name:'平乡县中西医结合医院',                          yh:1,  bao:0,  pg:0,  total:1,  last:'2026-09-12', isNew:true, yhNew:1},
-  {city:'邢台',  name:'沙河市人民医院',                                yh:0,  bao:0,  pg:2,  total:2,  last:'2026-09-11', isNew:true, pgNew:2},
-  {city:'邢台',  name:'邢台市襄都区中心医院',                          yh:0,  bao:0,  pg:1,  total:1,  last:'2026-09-08', isNew:true, pgNew:1},
-  // ── 张家口（5家）──
-  {city:'张家口',name:'怀来县医院',                                    yh:14, bao:0,  pg:0,  total:14, last:'2026-09-08', notIn3:true, yhNew:1},
-  {city:'张家口',name:'张家口市宣化区人民医院',                        yh:2,  bao:0,  pg:1,  total:3,  last:'2026-08-19', notIn3:true},
-  {city:'张家口',name:'张家口市下花园区医院',                          yh:3,  bao:0,  pg:0,  total:3,  last:'2026-09-07', yhNew:1},
-  {city:'张家口',name:'张北县医院',                                    yh:1,  bao:0,  pg:0,  total:1,  last:'2026-08-05', notIn3:true},
-  {city:'张家口',name:'蔚县蔚州医院',                                  yh:2,  bao:0,  pg:0,  total:2,  last:'2026-09-07', notIn3:true, yhNew:1},
-  // ── 秦皇岛（1家）──
-  {city:'秦皇岛',name:'北京大学第三医院秦皇岛医院',                    yh:2,  bao:0,  pg:0,  total:2,  last:'2026-08-10', notIn3:true},
-  // ── 廊坊（9家）──
-  {city:'廊坊',  name:'廊坊首都医科大学附属北京港澳医院香河医康医院', yh:2,  bao:0,  pg:0,  total:2,  last:'2026-08-20', notIn3:true},
-  {city:'廊坊',  name:'河北燕达医院',                                  yh:6,  bao:0,  pg:2,  total:8,  last:'2026-09-07', yhNew:1},
-  {city:'廊坊',  name:'固安县中医院',                                  yh:0,  bao:0,  pg:3,  total:3,  last:'2026-08-24'},
-  {city:'廊坊',  name:'三河燕郊福合第一医院',                          yh:2,  bao:0,  pg:0,  total:2,  last:'2026-09-11', notIn3:true, yhNew:1},
-  {city:'廊坊',  name:'廊坊市人民医院',                                yh:0,  bao:0,  pg:3,  total:3,  last:'2026-08-27'},
-  {city:'廊坊',  name:'廊坊市第四人民医院',                            yh:0,  bao:6,  pg:0,  total:6,  last:'2026-09-09', baoNew:1},
-  {city:'廊坊',  name:'京东中美医院',                                  yh:0,  bao:0,  pg:1,  total:1,  last:'2026-08-24'},
-  {city:'廊坊',  name:'誉美中西医结合肾病医院',                        yh:0,  bao:0,  pg:1,  total:1,  last:'2026-08-24'},
-  {city:'廊坊',  name:'通用环球中煤岭北医院',                          yh:0,  bao:0,  pg:1,  total:1,  last:'2026-09-11', isNew:true, pgNew:1},
-  // ── 承德（3家）──
-  {city:'承德',  name:'隆化县医院',                                    yh:0,  bao:1,  pg:1,  total:2,  last:'2026-08-07'},
-  {city:'承德',  name:'兴隆县人民医院',                                yh:0,  bao:0,  pg:1,  total:1,  last:'2026-08-21'},
-  {city:'承德',  name:'承德医学院附属医院',                            yh:0,  bao:0,  pg:1,  total:1,  last:'2026-09-04'},
-  // ── 衡水（5家）──
-  {city:'衡水',  name:'衡水市中西医结合医院',                          yh:0,  bao:3,  pg:0,  total:3,  last:'2026-08-19'},
-  {city:'衡水',  name:'武邑骨科医院（武邑裴氏医院）',                  yh:0,  bao:1,  pg:0,  total:1,  last:'2026-08-25'},
-  {city:'衡水',  name:'安平网都医院',                                  yh:0,  bao:3,  pg:0,  total:3,  last:'2026-09-09', baoNew:1},
-  {city:'衡水',  name:'深州市中西医结合医院',                          yh:1,  bao:0,  pg:0,  total:1,  last:'2026-07-31'},
-  {city:'衡水',  name:'故城县医院',                                    yh:0,  bao:0,  pg:2,  total:2,  last:'2026-08-13'},
-];
+const DATA = [{"hospital":"河北医科大学第二医院","city":"石家庄","grade":"A","status":"办理手续等待送货","agent":"河北语泽医疗器械有限公司","linked":"是","ship_g":1320,"jul":0,"aug":97,"sep":170,"q1g":21,"q2g":247,"total_g":515,"subtotal":268,"last":"2026-10-08","note":"截至9/4累计：1克3个+2克135个","src":"月报+828","oct":1},{"hospital":"980医院","city":"石家庄","grade":"A","status":"正常使用","agent":"河北鼎域创联医疗器械销售有限公司","linked":"是","ship_g":720,"jul":20,"aug":50,"sep":36,"q1g":0,"q2g":106,"total_g":212,"subtotal":106,"last":"2026-09-18","note":"3笔：7/23(20)+8/6(14)+8/27(36)","src":"月报+828","oct":0},{"hospital":"河北省人民医院","city":"石家庄","grade":"A","status":"正常使用","agent":"河北岑亦医疗器械有限公司","linked":"是","ship_g":48,"jul":0,"aug":12,"sep":12,"q1g":0,"q2g":24,"total_g":48,"subtotal":24,"last":"2026-09-07","note":"⚠️后台新增订单","src":"月报+828","oct":0},{"hospital":"河北医科大学第四医院","city":"石家庄","grade":"A","status":"正常使用","agent":"石家庄冉胜医药有限公司","linked":"是","ship_g":360,"jul":6,"aug":48,"sep":37,"q1g":91,"q2g":0,"total_g":91,"subtotal":91,"last":"2026-09-30","note":"9-4期间新增34笔1克(8/31两批)","src":"月报+828","oct":0},{"hospital":"河北省中医院","city":"石家庄","grade":"B","status":"办理手续等待送货","agent":"石家庄星瑞智创科技有限公司","linked":"是","ship_g":144,"jul":0,"aug":72,"sep":0,"q1g":0,"q2g":72,"total_g":144,"subtotal":72,"last":"2026-08-04","note":"","src":"月报+828","oct":0},{"hospital":"河北省胸科医院","city":"石家庄","grade":"B","status":"正常使用","agent":"石家庄山文科技有限公司","linked":"是","ship_g":120,"jul":12,"aug":12,"sep":0,"q1g":0,"q2g":24,"total_g":48,"subtotal":24,"last":"2026-08-28","note":"8/28订单12个未发货","src":"月报+828","oct":0},{"hospital":"辛集市第一医院","city":"石家庄","grade":"B","status":"正常使用","agent":"河北共盛医药有限公司","linked":"是","ship_g":120,"jul":3,"aug":8,"sep":11,"q1g":0,"q2g":22,"total_g":44,"subtotal":22,"last":"2026-09-19","note":"9-4期间新增2笔2克","src":"月报+828","oct":0},{"hospital":"石家庄市第三医院","city":"石家庄","grade":"B","status":"正常使用","agent":"国药乐仁堂河北医疗器械贸易有限公司","linked":"是","ship_g":24,"jul":0,"aug":0,"sep":12,"q1g":0,"q2g":12,"total_g":24,"subtotal":12,"last":"2026-09-14","note":"","src":"月报","oct":0},{"hospital":"平山县医院","city":"石家庄","grade":"C","status":"正常使用","agent":"国药乐仁堂河北医疗器械贸易有限公司","linked":"是","ship_g":48,"jul":24,"aug":0,"sep":0,"q1g":0,"q2g":24,"total_g":48,"subtotal":24,"last":"2026-07-30","note":"","src":"月报+828","oct":0},{"hospital":"高邑县医院","city":"石家庄","grade":"C","status":"正常使用","agent":"石家庄三顾医疗器械贸易有限公司","linked":"是","ship_g":24,"jul":12,"aug":12,"sep":0,"q1g":24,"q2g":0,"total_g":24,"subtotal":24,"last":"2026-08-25","note":"2笔：7/17+8/25各12个","src":"月报+828","oct":0},{"hospital":"石家庄医专附属医院","city":"石家庄","grade":"C","status":"办理手续等待送货","agent":"国药乐仁堂河北医疗器械贸易有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"赵县医院","city":"石家庄","grade":"C","status":"办理手续等待送货","agent":"石家庄三顾医疗器械贸易有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"辛集市中医院","city":"石家庄","grade":"C","status":"正常使用","agent":"河南奕晟医疗器械有限公司","linked":"是","ship_g":24,"jul":0,"aug":0,"sep":24,"q1g":0,"q2g":24,"total_g":48,"subtotal":24,"last":"2026-09-04","note":"2笔各12个2克，首次后台采购（尚未上平台）","src":"月报+828","oct":0},{"hospital":"石家庄市妇幼保健院","city":"石家庄","grade":"C","status":"正常使用","agent":"国药乐仁堂河北医疗器械贸易有限公司","linked":"是","ship_g":12,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"新乐市中医院","city":"石家庄","grade":"C","status":"正常使用","agent":"河北岑亦医疗器械有限公司","linked":"是","ship_g":24,"jul":0,"aug":0,"sep":6,"q1g":0,"q2g":6,"total_g":12,"subtotal":6,"last":"2026-09-16","note":"","src":"月报","oct":0},{"hospital":"保定市第二中心医院","city":"保定","grade":"B","status":"正常使用","agent":"保定德宇医疗器械有限公司","linked":"是","ship_g":12,"jul":0,"aug":1,"sep":4,"q1g":5,"q2g":0,"total_g":5,"subtotal":5,"last":"2026-09-24","note":"","src":"月报+828","oct":0},{"hospital":"保定市第一中心医院","city":"保定","grade":"B","status":"正常使用","agent":"保定宏康医疗科技有限公司","linked":"是","ship_g":24,"jul":0,"aug":0,"sep":24,"q1g":24,"q2g":0,"total_g":24,"subtotal":24,"last":"2026-09-22","note":"首次平台采购12笔1克","src":"月报+828","oct":0},{"hospital":"保定市第一医院","city":"保定","grade":"B","status":"办理手续等待送货","agent":"保定宏康医疗科技有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"定兴县医院","city":"保定","grade":"C","status":"正常使用","agent":"华润保定医药有限公司","linked":"是","ship_g":120,"jul":10,"aug":0,"sep":5,"q1g":0,"q2g":15,"total_g":30,"subtotal":15,"last":"2026-09-18","note":"","src":"月报+828","oct":0},{"hospital":"保定市第二医院","city":"保定","grade":"C","status":"正常使用","agent":"华润保定医药有限公司","linked":"是","ship_g":720,"jul":0,"aug":2,"sep":2,"q1g":2,"q2g":2,"total_g":6,"subtotal":4,"last":"2026-09-08","note":"两种规格各1笔","src":"月报+828","oct":0},{"hospital":"保定市第一中医院","city":"保定","grade":"C","status":"正常使用","agent":"华润保定医药有限公司","linked":"是","ship_g":60,"jul":0,"aug":0,"sep":32,"q1g":32,"q2g":0,"total_g":32,"subtotal":32,"last":"2026-09-29","note":"","src":"月报+828","oct":0},{"hospital":"唐山市第二医院","city":"唐山","grade":"A","status":"办理手续等待送货","agent":"九思堂唐山贸易有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"滦州市人民医院","city":"唐山","grade":"B","status":"正常使用","agent":"九思堂唐山贸易有限公司","linked":"是","ship_g":180,"jul":1,"aug":0,"sep":2,"q1g":3,"q2g":0,"total_g":3,"subtotal":3,"last":"2026-09-01","note":"9-4期间新增2笔1克","src":"月报+828","oct":0},{"hospital":"华北理工大学附属医院","city":"唐山","grade":"B","status":"已提单等待上会","agent":"华润医疗科技河北有限公司","linked":"否","ship_g":0,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"开滦总医院","city":"唐山","grade":"B","status":"办理手续等待送货","agent":"国药乐仁堂河北医疗器械服务有限公司","linked":"是","ship_g":108,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"唐山人民医院","city":"唐山","grade":"B","status":"办理手续等待送货","agent":"河北深格商贸有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"唐山虹桥骨科医院","city":"唐山","grade":"C","status":"正常使用","agent":"杭州任瑞医疗科技有限公司","linked":"否","ship_g":12,"jul":12,"aug":0,"sep":0,"q1g":12,"q2g":0,"total_g":12,"subtotal":12,"last":"2026-07-28","note":"","src":"月报+828","oct":0},{"hospital":"唐山市中医院","city":"唐山","grade":"C","status":"正常使用","agent":"国药乐仁堂河北医疗器械服务有限公司","linked":"否","ship_g":24,"jul":0,"aug":2,"sep":0,"q1g":2,"q2g":0,"total_g":2,"subtotal":2,"last":"2026-08-28","note":"⚠️未发货不在平台CSV中","src":"月报+828","oct":0},{"hospital":"滦南慈济中医医院","city":"唐山","grade":"C","status":"正常使用","agent":"唐山市端文医疗器械有限公司","linked":"否","ship_g":540,"jul":0,"aug":1,"sep":0,"q1g":2,"q2g":0,"total_g":2,"subtotal":2,"last":"2026-10-01","note":"","src":"月报+828","oct":1},{"hospital":"玉田县中医院","city":"唐山","grade":"C","status":"办理手续等待送货","agent":"国药乐仁堂河北医疗器械服务有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"峰峰总院","city":"邯郸","grade":"A","status":"正常使用","agent":"邯郸市志英医药有限公司","linked":"是","ship_g":360,"jul":0,"aug":0,"sep":60,"q1g":60,"q2g":0,"total_g":60,"subtotal":60,"last":"2026-09-29","note":"","src":"月报","oct":0},{"hospital":"邯郸市第一医院","city":"邯郸","grade":"B","status":"正常使用","agent":"河北京慈医疗器械销售有限公司","linked":"是","ship_g":180,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"磁县医院","city":"邯郸","grade":"C","status":"正常使用","agent":"国药乐仁堂器械有限公司","linked":"是","ship_g":36,"jul":0,"aug":36,"sep":0,"q1g":36,"q2g":0,"total_g":36,"subtotal":36,"last":"2026-08-04","note":"⚠️发票抬头为税号","src":"月报+828","oct":0},{"hospital":"武安仁慈医院","city":"邯郸","grade":"C","status":"正常使用","agent":"河北德聚仁合医疗器械贸易有限公司","linked":"否","ship_g":0,"jul":5,"aug":12,"sep":0,"q1g":17,"q2g":0,"total_g":17,"subtotal":17,"last":"2026-08-08","note":"3笔：7/26(2+3)+8/8(12)","src":"月报+828","oct":0},{"hospital":"邯郸汇仁中医医院","city":"邯郸","grade":"C","status":"正常使用","agent":"河北德聚仁合医疗器械贸易有限公司","linked":"否","ship_g":0,"jul":0,"aug":3,"sep":0,"q1g":3,"q2g":0,"total_g":3,"subtotal":3,"last":"2026-08-23","note":"2笔；CSV仅显示1笔","src":"月报+828","oct":0},{"hospital":"曲周县医院","city":"邯郸","grade":"C","status":"办理手续等待送货","agent":"河北欣科医疗器械销售有限公司","linked":"否","ship_g":0,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"邯郸市人民医院","city":"邯郸","grade":"C","status":"正常使用","agent":"邯郸市叁合医疗科技有限公司","linked":"是","ship_g":60,"jul":0,"aug":0,"sep":1,"q1g":1,"q2g":0,"total_g":1,"subtotal":1,"last":"2026-09-02","note":"首次平台采购","src":"月报+828","oct":0},{"hospital":"磁县中医院","city":"邯郸","grade":"C","status":"正常使用","agent":"河北德聚仁合医疗器械贸易有限公司","linked":"是","ship_g":60,"jul":0,"aug":2,"sep":2,"q1g":4,"q2g":0,"total_g":4,"subtotal":4,"last":"2026-09-10","note":"2笔1克(8/31)","src":"月报+828","oct":0},{"hospital":"肥乡中医骨科医院","city":"邯郸","grade":"C","status":"办理手续等待送货","agent":"河北京慈医疗器械销售有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":2,"q1g":3,"q2g":0,"total_g":3,"subtotal":3,"last":"2026-10-08","note":"","src":"月报","oct":1},{"hospital":"邯钢医院","city":"邯郸","grade":"C","status":"正常使用","agent":"国药乐仁堂器械有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"鸡泽县中医院","city":"邯郸","grade":"C","status":"正常使用","agent":"河北德聚仁合医疗器械贸易有限公司","linked":"是","ship_g":12,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"邯郸市中医院","city":"邯郸","grade":"C","status":"正常使用","agent":"河北京慈医疗器械销售有限公司","linked":"是","ship_g":180,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"邯郸市第二医院","city":"邯郸","grade":"C","status":"办理手续等待送货","agent":"河北京慈医疗器械销售有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":3,"q1g":3,"q2g":0,"total_g":3,"subtotal":3,"last":"2026-09-28","note":"","src":"月报","oct":0},{"hospital":"永年区第一医院","city":"邯郸","grade":"C","status":"正常使用","agent":"河北京慈医疗器械销售有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":2,"q1g":1,"q2g":1,"total_g":3,"subtotal":2,"last":"2026-09-02","note":"⚠️发票抬头为税号推断","src":"月报+828","oct":0},{"hospital":"矿务局总医院","city":"邢台","grade":"A","status":"正常使用","agent":"上海福厚堂医疗科技有限公司","linked":"是","ship_g":120,"jul":0,"aug":0,"sep":16,"q1g":0,"q2g":19,"total_g":38,"subtotal":19,"last":"2026-10-08","note":"5笔(华北医疗健康)：9/15(2)+9/20(6)+9/21(2)+9/24(3)+9/28(3)","src":"月报+828","oct":3},{"hospital":"信都区人民医院","city":"邢台","grade":"C","status":"正常使用","agent":"上海福厚堂医疗科技有限公司","linked":"是","ship_g":0,"jul":0,"aug":3,"sep":2,"q1g":0,"q2g":7,"total_g":14,"subtotal":7,"last":"2026-10-07","note":"9-4期间新增1笔2克","src":"月报+828","oct":2},{"hospital":"宁晋中西医结合医院","city":"邢台","grade":"C","status":"正常使用","agent":"九州通医疗器械（邢台）有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":12,"q1g":12,"q2g":0,"total_g":12,"subtotal":12,"last":"2026-09-09","note":"","src":"月报+828","oct":0},{"hospital":"柏乡县中心医院","city":"邢台","grade":"C","status":"正常使用","agent":"上海福厚堂医疗科技有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"临西县第二医院","city":"邢台","grade":"C","status":"办理手续等待送货","agent":"九州通医疗器械（邢台）有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":2,"q1g":2,"q2g":0,"total_g":2,"subtotal":2,"last":"2026-09-09","note":"","src":"月报+828","oct":0},{"hospital":"临西县中医院","city":"邢台","grade":"C","status":"正常使用","agent":"河北钴钛商贸有限公司","linked":"否","ship_g":0,"jul":0,"aug":0,"sep":2,"q1g":2,"q2g":0,"total_g":2,"subtotal":2,"last":"2026-09-25","note":"首次采购","src":"828","oct":0},{"hospital":"河间市人民医院","city":"沧州","grade":"B","status":"正常使用","agent":"上海褚合医疗器械有限公司","linked":"是","ship_g":96,"jul":4,"aug":9,"sep":17,"q1g":25,"q2g":6,"total_g":37,"subtotal":31,"last":"2026-10-08","note":"9-4期间新增5笔(1克3+2克2)","src":"月报+828","oct":1},{"hospital":"沧州和平医院","city":"沧州","grade":"C","status":"正常使用","agent":"上海褚合医疗器械有限公司","linked":"否","ship_g":0,"jul":0,"aug":0,"sep":6,"q1g":6,"q2g":0,"total_g":6,"subtotal":6,"last":"2026-09-07","note":"首次后台采购","src":"828","oct":0},{"hospital":"黄骅市骨科医院","city":"沧州","grade":"C","status":"正常使用","agent":"沧州麦驰医疗器械有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"海兴县医院","city":"沧州","grade":"C","status":"办理手续等待送货","agent":"国药乐仁堂沧州器械有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"沧县医院","city":"沧州","grade":"C","status":"正常使用","agent":"沧州麦驰医疗器械有限公司","linked":"是","ship_g":120,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"黄骅市中医院","city":"沧州","grade":"C","status":"正常使用","agent":"沧州麦驰医疗器械有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"怀来县医院","city":"张家口","grade":"C","status":"正常使用","agent":"张家口衡兴医疗器械有限公司","linked":"否","ship_g":96,"jul":6,"aug":12,"sep":15,"q1g":0,"q2g":33,"total_g":66,"subtotal":33,"last":"2026-09-29","note":"9-4期间新增5笔","src":"月报+828","oct":0},{"hospital":"张北县医院","city":"张家口","grade":"C","status":"正常使用","agent":"河北庆繁医疗器械有限公司","linked":"否","ship_g":24,"jul":0,"aug":12,"sep":0,"q1g":12,"q2g":0,"total_g":12,"subtotal":12,"last":"2026-08-05","note":"","src":"月报+828","oct":0},{"hospital":"下花园区医院","city":"张家口","grade":"C","status":"正常使用","agent":"河北庆繁医疗器械有限公司","linked":"是","ship_g":0,"jul":0,"aug":4,"sep":1,"q1g":0,"q2g":5,"total_g":10,"subtotal":5,"last":"2026-09-07","note":"2笔：8/17(2)+8/19(2)","src":"月报+828","oct":0},{"hospital":"宣化区人民医院","city":"张家口","grade":"C","status":"正常使用","agent":"张家口衡兴医疗器械有限公司","linked":"否","ship_g":0,"jul":0,"aug":3,"sep":3,"q1g":0,"q2g":6,"total_g":12,"subtotal":6,"last":"2026-09-23","note":"2笔：8/4(2)+8/10(1)","src":"月报+828","oct":0},{"hospital":"蔚县蔚州医院","city":"张家口","grade":"C","status":"正常使用","agent":"河北庆繁医疗器械有限公司","linked":"否","ship_g":0,"jul":1,"aug":0,"sep":1,"q1g":1,"q2g":1,"total_g":3,"subtotal":2,"last":"2026-09-07","note":"","src":"月报+828","oct":0},{"hospital":"崇礼区医院","city":"张家口","grade":"C","status":"正常使用","agent":"张家口恒宥医疗器械有限公司","linked":"是","ship_g":84,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"蔚县中医院二分院","city":"张家口","grade":"C","status":"办理手续等待送货","agent":"河北庆繁医疗器械有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"三河燕郊福合第一医院","city":"廊坊","grade":"C","status":"正常使用","agent":"北京瑞仕康科技有限公司","linked":"否","ship_g":36,"jul":0,"aug":12,"sep":24,"q1g":36,"q2g":0,"total_g":36,"subtotal":36,"last":"2026-09-11","note":"","src":"月报+828","oct":0},{"hospital":"廊坊燕达医院","city":"廊坊","grade":"C","status":"正常使用","agent":"国药器械廊坊有限公司","linked":"是","ship_g":72,"jul":0,"aug":6,"sep":15,"q1g":0,"q2g":21,"total_g":42,"subtotal":21,"last":"2026-09-30","note":"9-4期间新增4笔2克","src":"月报+828","oct":0},{"hospital":"北京潞河医院香河医康医院","city":"廊坊","grade":"C","status":"正常使用","agent":"北京康诚医疗器械有限公司","linked":"否","ship_g":72,"jul":0,"aug":2,"sep":0,"q1g":0,"q2g":2,"total_g":4,"subtotal":2,"last":"2026-08-19","note":"⚠️医院全名需核实","src":"月报+828","oct":0},{"hospital":"大城县中医院","city":"廊坊","grade":"C","status":"正常使用","agent":"大城县进德医疗器械销售有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"大城县医院","city":"廊坊","grade":"C","status":"正常使用","agent":"大城县进德医疗器械销售有限公司","linked":"是","ship_g":12,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"三河市中医院","city":"廊坊","grade":"C","status":"正常使用","agent":"华润廊坊医药有限公司","linked":"是","ship_g":12,"jul":0,"aug":0,"sep":12,"q1g":12,"q2g":0,"total_g":12,"subtotal":12,"last":"2026-09-24","note":"","src":"月报","oct":0},{"hospital":"北医三院秦皇岛医院","city":"秦皇岛","grade":"C","status":"正常使用","agent":"国药集团秦皇岛医疗器械有限公司","linked":"是","ship_g":96,"jul":0,"aug":5,"sep":1,"q1g":2,"q2g":4,"total_g":10,"subtotal":6,"last":"2026-09-16","note":"两种规格","src":"月报+828","oct":0},{"hospital":"秦皇岛经济开发区医院","city":"秦皇岛","grade":"C","status":"办理手续等待送货","agent":"国药集团秦皇岛医疗器械有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"深州中西医结合医院","city":"衡水","grade":"C","status":"正常使用","agent":"石家庄岩水商贸有限公司","linked":"是","ship_g":12,"jul":12,"aug":0,"sep":0,"q1g":12,"q2g":0,"total_g":12,"subtotal":12,"last":"2026-07-30","note":"","src":"月报+828","oct":0},{"hospital":"衡水景州德济医院","city":"衡水","grade":"C","status":"办理手续等待送货","agent":"天津嘉拓医疗器械科技有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"双滦区人民医院","city":"承德","grade":"C","status":"正常使用","agent":"北京鸿驰康泰商贸有限公司","linked":"是","ship_g":12,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"容城县中医院","city":"雄安","grade":"C","status":"办理手续等待送货","agent":"华润保定医药有限公司","linked":"是","ship_g":0,"jul":0,"aug":0,"sep":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报","oct":0},{"hospital":"平乡县中西医结合医院","city":"邢台","grade":"C","status":"正常使用","agent":"河北钴钛商贸有限公司","linked":"否","ship_g":12,"jul":0,"aug":0,"sep":3,"q1g":3,"q2g":0,"total_g":3,"subtotal":3,"last":"2026-09-30","note":"新增自后台CSV","src":"828","oct":0},{"hospital":"邯郸华景医院","city":"邯郸","grade":"C","status":"正常使用","agent":"河北德聚仁合医疗器械贸易有限公司","linked":"否","ship_g":0,"jul":0,"aug":0,"sep":3,"q1g":3,"q2g":0,"total_g":3,"subtotal":3,"last":"2026-09-18","note":"新增自后台CSV","src":"828","oct":0},{"city":"保定","grade":"C","status":"正常使用","agent":"河北三点医疗科技有限公司","linked":"否","ship_g":120,"note":"新增自后台CSV","src":"828","hospital":"保定市第七医院","jul":0,"aug":0,"sep":60,"q1g":60,"q2g":0,"total_g":60,"subtotal":60,"last":"2026-09-15","oct":0},{"city":"保定","grade":"C","status":"正常使用","agent":"瑞尧恒华医疗器械（涿州市）有限公司","linked":"否","ship_g":12,"note":"新增自后台CSV","src":"828","hospital":"涿州市医院","jul":0,"aug":0,"sep":12,"q1g":0,"q2g":12,"total_g":24,"subtotal":12,"last":"2026-09-18","oct":0},{"city":"石家庄","grade":"C","status":"正常使用","agent":"石家庄乘黄科技有限公司","linked":"否","ship_g":36,"note":"新增自后台CSV","src":"828","hospital":"石家庄市第二医院","jul":0,"aug":0,"sep":6,"q1g":7,"q2g":0,"total_g":7,"subtotal":7,"last":"2026-10-06","oct":1},{"hospital":"南皮县中医院","city":"沧州","grade":"C","status":"正常使用","agent":"沧州轩宏商贸有限公司","linked":"否","ship_g":12,"jul":0,"aug":0,"sep":2,"q1g":2,"q2g":0,"total_g":2,"subtotal":2,"last":"2026-09-21","note":"新增自后台CSV","src":"828","oct":0},{"hospital":"南皮县人民医院","city":"沧州","grade":"C","status":"正常使用","agent":"沧州轩宏商贸有限公司","linked":"否","ship_g":0,"jul":0,"aug":0,"sep":3,"q1g":3,"q2g":0,"total_g":3,"subtotal":3,"last":"2026-09-21","note":"新增自后台CSV","src":"828","oct":0},{"hospital":"涞水县医院","city":"保定","grade":"—","status":"—","agent":"—","linked":"否","ship_g":0,"jul":0,"aug":0,"sep":1,"q1g":1,"q2g":0,"total_g":1,"subtotal":1,"last":"2026-09-29","note":"新增自后台CSV","src":"828","oct":0},{"hospital":"宣化区医院","city":"张家口","grade":"C","status":"正常使用","agent":"张家口衡兴医疗器械有限公司","linked":"否","ship_g":12,"jul":0,"aug":0,"sep":1,"q1g":0,"q2g":1,"total_g":2,"subtotal":1,"last":"2026-09-14","note":"新增自后台CSV","src":"828","oct":0},{"hospital":"邯郸市中心医院","city":"邯郸","grade":"A","status":"办理手续等待送货","agent":"邯郸市志英医药有限公司","linked":"否","ship_g":360,"jul":0,"aug":0,"sep":0,"oct":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报"},{"hospital":"河北大学附属医院","city":"保定","grade":"A","status":"已提单等待上会","agent":"保定通畅医疗科技有限公司","linked":"否","ship_g":36,"jul":0,"aug":0,"sep":0,"oct":0,"q1g":0,"q2g":0,"total_g":0,"subtotal":0,"last":"","note":"","src":"月报"}];
+const KPI = {"total":86,"purchased":57,"normal":64,"waiting":21,"no_link":26,"ship_g":7140,"total_g":1939,"jul":128,"aug":438,"sep":667,"oct":10,"subtotal":1243,"q1g":547,"q2g":696,"grade_A":9,"grade_B":13,"grade_C":63,"linked_y":60,"linked_n":26,"purch_y":35,"purch_n":22,"pend_y":25,"pend_n":4,"proc_g":12720,"proc_abw1":3120,"proc_abw2":9600};
+const CITIES = ["石家庄","保定","唐山","邯郸","邢台","沧州","张家口","廊坊","秦皇岛","衡水","承德","雄安"];
+const CSTATS = {"石家庄":{"n":16,"ship_g":3024,"jul":77,"aug":311,"sep":314,"oct":2,"total_g":1265,"normal":5,"wait":10,"A":4,"B":4,"C":7},"保定":{"n":9,"ship_g":1104,"jul":10,"aug":3,"sep":140,"oct":0,"total_g":182,"normal":4,"wait":2,"A":0,"B":3,"C":3},"唐山":{"n":9,"ship_g":864,"jul":13,"aug":3,"sep":2,"oct":1,"total_g":19,"normal":4,"wait":4,"A":1,"B":4,"C":4},"邯郸":{"n":15,"ship_g":1248,"jul":5,"aug":53,"sep":73,"oct":1,"total_g":133,"normal":6,"wait":8,"A":1,"B":1,"C":12},"邢台":{"n":7,"ship_g":132,"jul":0,"aug":3,"sep":37,"oct":5,"total_g":71,"normal":4,"wait":2,"A":1,"B":0,"C":5},"沧州":{"n":8,"ship_g":228,"jul":4,"aug":9,"sep":28,"oct":1,"total_g":48,"normal":5,"wait":1,"A":0,"B":1,"C":5},"张家口":{"n":8,"ship_g":216,"jul":7,"aug":31,"sep":21,"oct":0,"total_g":105,"normal":6,"wait":1,"A":0,"B":0,"C":7},"廊坊":{"n":6,"ship_g":204,"jul":0,"aug":20,"sep":51,"oct":0,"total_g":94,"normal":5,"wait":1,"A":0,"B":0,"C":6},"秦皇岛":{"n":2,"ship_g":96,"jul":0,"aug":5,"sep":1,"oct":0,"total_g":10,"normal":1,"wait":1,"A":0,"B":0,"C":2},"衡水":{"n":2,"ship_g":12,"jul":12,"aug":0,"sep":0,"oct":0,"total_g":12,"normal":1,"wait":1,"A":0,"B":0,"C":2},"承德":{"n":1,"ship_g":12,"jul":0,"aug":0,"sep":0,"oct":0,"total_g":0,"normal":1,"wait":0,"A":0,"B":0,"C":1},"雄安":{"n":1,"ship_g":0,"jul":0,"aug":0,"sep":0,"oct":0,"total_g":0,"normal":0,"wait":1,"A":0,"B":0,"C":1}};
 
-// Render all-hospital table with city filter
-const allHospCities = ['全部',...[...new Set(ALL_HOSPITALS.map(h=>h.city))]];
-const allHospTabsEl = document.getElementById('allHospTabs');
-allHospCities.forEach((city,i)=>{
-  const cnt = city==='全部' ? ALL_HOSPITALS.length : ALL_HOSPITALS.filter(h=>h.city===city).length;
-  const tab = document.createElement('div');
-  tab.className='tab'+(i===0?' active':'');
-  tab.innerHTML = `${city} <span style="font-size:10px;opacity:.7">(${cnt})</span>`;
-  tab.onclick=()=>{
-    allHospTabsEl.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-    tab.classList.add('active');
-    renderAllHosp(city);
-  };
-  allHospTabsEl.appendChild(tab);
-});
+// ── KPI 填充 ──────────────────────────────────────────────
+document.getElementById('kv-total').innerHTML     = KPI.total+'<span class="kpi-unit">家</span>';
+document.getElementById('ks-grade').textContent   = '报量 '+KPI.linked_y+'家 · 二次开发 '+KPI.linked_n+'家';
+document.getElementById('kv-purchased').innerHTML = KPI.purchased+'<span class="kpi-unit">家</span>';
+document.getElementById('ks-purchased-pct').textContent = '报量 '+KPI.purch_y+'家 · 二次开发 '+KPI.purch_n+'家';
+document.getElementById('kv-ship').innerHTML        = KPI.proc_g.toLocaleString()+'<span class="kpi-unit">克</span>';
+document.getElementById('ks-abw1').textContent      = KPI.proc_abw1.toLocaleString();
+document.getElementById('ks-abw2').textContent      = KPI.proc_abw2.toLocaleString();
+document.getElementById('ks-chain-dist').textContent= KPI.ship_g.toLocaleString();
+document.getElementById('ks-chain-hosp').textContent= KPI.total_g.toLocaleString();
+document.getElementById('kv-subtotal').innerHTML  = KPI.subtotal+'<span class="kpi-unit">个</span>';
+document.getElementById('ks-q1g').textContent     = KPI.q1g;
+document.getElementById('ks-q2g').textContent     = KPI.q2g;
+document.getElementById('kv-aug').innerHTML       = KPI.oct+'<span class="kpi-unit">个</span>';
+document.getElementById('ks-jul').textContent     = KPI.sep;
+document.getElementById('kv-nopurchase').innerHTML= (KPI.total-KPI.purchased)+'<span class="kpi-unit">家</span>';
+document.getElementById('ks-nolink').textContent  = '报量 '+KPI.pend_y+'家 · 二次开发 '+KPI.pend_n+'家';
 
-function renderAllHosp(filterCity){
-  const tbody = document.getElementById('tbAllHosp');
-  tbody.innerHTML='';
-  const list = filterCity==='全部' ? ALL_HOSPITALS : ALL_HOSPITALS.filter(h=>h.city===filterCity);
-  let lastCity='', idx=0;
-  list.forEach(h=>{
-    const hasYH = h.yh > 0;
-    if(filterCity==='全部' && h.city!==lastCity){
-      const n = ALL_HOSPITALS.filter(x=>x.city===h.city).length;
-      const yhN = ALL_HOSPITALS.filter(x=>x.city===h.city && x.yh>0).length;
-      tbody.innerHTML+=`<tr class="city-row"><td colspan="11">▶ ${h.city}（${n}家，其中颐合恒瑞 ${yhN}家）</td></tr>`;
-      lastCity=h.city; idx=0;
-    }
-    idx++;
-    const rowBg = hasYH ? 'background:#f0f6ff' : '';
-    const yhCell = h.yh>0
-      ? `<span class="badge bg-yh">★ ${h.yh}笔</span>`
-      : '<span style="color:#ddd">—</span>';
-    const baoCell = h.bao>0
-      ? `<span class="badge bg-bao">${h.bao}笔</span>`
-      : '<span style="color:#ddd">—</span>';
-    const pgCell = h.pg>0
-      ? `<span class="badge bg-pg">${h.pg}笔</span>`
-      : '<span style="color:#ddd">—</span>';
-    const nwCls = h.isNew ? 'new-week' : '';
-    const nwBadge = h.isNew ? '<span class="new-badge">本周新增</span>' : '';
-    const devBadge = (h.yh > 0 && h.notIn3) ? '<span class="dev2-badge">二次开发</span>' : '';
-    const yhNew = h.yhNew !== undefined ? h.yhNew : (h.isNew && h.last >= '2026-08-22' ? h.yh : 0);
-    const baoNew = h.baoNew !== undefined ? h.baoNew : (h.isNew && h.last >= '2026-08-22' ? h.bao : 0);
-    const pgNew = h.pgNew !== undefined ? h.pgNew : (h.isNew && h.last >= '2026-08-22' ? h.pg : 0);
-    const yhNewCell  = yhNew  > 0 ? `<span style="font-size:11px;color:#1d5f9e;font-weight:600">+${yhNew}笔</span>`  : '<span style="color:#ddd">—</span>';
-    const baoNewCell = baoNew > 0 ? `<span style="font-size:11px;color:#c26a00;font-weight:600">+${baoNew}笔</span>` : '<span style="color:#ddd">—</span>';
-    const pgNewCell  = pgNew  > 0 ? `<span style="font-size:11px;color:#276d27;font-weight:600">+${pgNew}笔</span>`  : '<span style="color:#ddd">—</span>';
-    tbody.innerHTML+=`<tr class="${nwCls}" style="${rowBg}">
-      <td>${idx}</td>
-      <td>${h.city}</td>
-      <td><strong>${h.name}</strong>${nwBadge}${devBadge}</td>
-      <td>${yhCell}</td>
-      <td>${yhNewCell}</td>
-      <td>${baoCell}</td>
-      <td>${baoNewCell}</td>
-      <td>${pgCell}</td>
-      <td>${pgNewCell}</td>
-      <td><strong>${h.total}</strong></td>
-      <td style="color:#555;font-size:12px">${h.last}</td>
-    </tr>`;
-  });
-}
-renderAllHosp('全部');
-
-// ── Shared chart constants (declared first to avoid TDZ) ──
-const colors = { yh:'#4e79a7', bao:'#f28e2b', pg:'#59a14f' };
-const gridColor = '#eef1f6';
-
-// ════════════════════════════════
-//  DATA
-// ════════════════════════════════
-
-const UNPURCHASED = [
-  // ── 石家庄（6家）──
-  {city:'石家庄',name:'石家庄市第三医院',                       grade:'B',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'—'},
-  {city:'石家庄',name:'石家庄市妇幼保健院',                     grade:'B',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'—'},
-  {city:'石家庄',name:'赵县人民医院',                           grade:'C',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'—'},
-  {city:'石家庄',name:'石家庄新乐市中医院',                     grade:'C',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'—'},
-  {city:'石家庄',name:'石家庄医学高等专科学校附属医院',         grade:'C',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'—'},
-  // ── 唐山（4家）──
-  {city:'唐山',  name:'唐山市第二医院',                         grade:'A',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'九思堂唐山贸易有限公司'},
-  {city:'唐山',  name:'唐山人民医院',                           grade:'B',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'河北深格商贸有限公司'},
-  {city:'唐山',  name:'开滦总医院',                             grade:'B',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'国药乐仁堂河北医疗器械服务有限公司'},
-  {city:'唐山',  name:'玉田县中医医院',                         grade:'C',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'国药乐仁堂河北医疗器械服务有限公司'},
-  // ── 保定（2家）──
-  {city:'保定',  name:'保定市第一医院',                         grade:'B',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'保定宏康医疗科技有限公司'},
-  {city:'保定',  name:'保定市第一中医院',                       grade:'C',hasQty:'是',status:'正常使用',         delivery:'—',    dealer:'华润保定医药有限公司'},
-  // ── 沧州（4家）──
-  {city:'沧州',  name:'沧县医院',                               grade:'C',hasQty:'是',status:'正常使用',         delivery:'120克',dealer:'沧州麦驰医疗器械有限公司'},
-  {city:'沧州',  name:'黄骅市中医医院',                         grade:'C',hasQty:'是',status:'正常使用',         delivery:'—',    dealer:'沧州麦驰医疗器械有限公司'},
-  {city:'沧州',  name:'黄骅市骨科医院',                         grade:'C',hasQty:'是',status:'正常使用',         delivery:'—',    dealer:'沧州麦驰医疗器械有限公司'},
-  {city:'沧州',  name:'海兴县医院',                             grade:'C',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'国药乐仁堂沧州器械有限公司'},
-  // ── 邯郸（6家）──
-  {city:'邯郸',  name:'华北医疗健康产业集团峰峰总医院',         grade:'A',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'邯郸市志英医药有限公司'},
-  {city:'邯郸',  name:'邯郸市第一医院',                         grade:'B',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'河北京慈医疗器械销售有限公司'},
-  {city:'邯郸',  name:'鸡泽县中医院',                           grade:'C',hasQty:'是',status:'正常使用',         delivery:'12克', dealer:'河北德聚仁合医疗器械贸易有限公司'},
-  {city:'邯郸',  name:'邯郸市中医院',                           grade:'C',hasQty:'是',status:'办理手续等待送货',delivery:'120克',dealer:'河北京慈医疗器械销售有限公司'},
-  {city:'邯郸',  name:'肥乡县中医院',                           grade:'C',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'河北京慈医疗器械销售有限公司'},
-  {city:'邯郸',  name:'邯郸市第二医院',                         grade:'C',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'河北京慈医疗器械销售有限公司'},
-  // ── 邢台（2家）──
-  {city:'邢台',  name:'华北医疗健康集团邢台总医院',             grade:'A',hasQty:'是',status:'正常使用',         delivery:'60克', dealer:'上海福厚堂医疗科技有限公司'},
-  {city:'邢台',  name:'柏乡县中心医院',                         grade:'C',hasQty:'是',status:'正常使用',         delivery:'—',    dealer:'上海福厚堂医疗科技有限公司'},
-  // ── 张家口（2家）──
-  {city:'张家口',name:'蔚县中医院第二分院',                     grade:'C',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'河北庆繁医疗器械有限公司'},
-  {city:'张家口',name:'北京大学第三医院崇礼院区',               grade:'C',hasQty:'是',status:'正常使用',         delivery:'72克', dealer:'张家口恒宥医疗器械有限公司'},
-  // ── 秦皇岛（2家）──
-  {city:'秦皇岛',name:'秦皇岛经济技术开发区医院',               grade:'C',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'国药集团秦皇岛医疗器械有限公司'},
-  {city:'秦皇岛',name:'秦皇岛军工医院',                         grade:'B',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'—'},
-  // ── 承德（1家）──
-  {city:'承德',  name:'承德市双滦区医院（承德市精神病医院）',   grade:'C',hasQty:'是',status:'正常使用',         delivery:'12克', dealer:'北京鸿驰康泰商贸有限公司'},
-  // ── 廊坊（3家）──
-  {city:'廊坊',  name:'大城县医院',                             grade:'C',hasQty:'是',status:'正常使用',         delivery:'12克', dealer:'大城县进德医疗器械销售有限公司'},
-  {city:'廊坊',  name:'大城县中医医院',                         grade:'C',hasQty:'是',status:'正常使用',         delivery:'—',    dealer:'大城县进德医疗器械销售有限公司'},
-  {city:'廊坊',  name:'三河市中医院',                           grade:'C',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'华润廊坊医药有限公司'},
-  // ── 衡水（1家）──
-  {city:'衡水',  name:'景州德济医院',                           grade:'C',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'天津嘉拓医疗器械科技有限公司'},
-  // ── 雄安（1家）──
-  {city:'雄安',  name:'容城县中医医院',                         grade:'C',hasQty:'是',status:'办理手续等待送货',delivery:'—',    dealer:'华润保定医药有限公司'},
-];
-
-// ════════════════════════════════
-//  RENDER TABLES
-// ════════════════════════════════
-
-function stClass(s){
-  if(s.includes('等待送货')||s.includes('等待上会')) return 'st-wait';
-  if(s.includes('正常使用')) return 'st-use';
-  return 'st-other';
-}
-function acClass(a){
-  if(a.includes('推动平台')) return 'ac-push';
-  if(a.includes('上会'))    return 'ac-meet';
-  return 'ac-proc';
-}
-function rkClass(r){
-  if(r===1) return 'rk-1'; if(r===2) return 'rk-2'; if(r===3) return 'rk-3'; return 'rk-n';
-}
-
-// Unpurchased table — 只展示报量清单中的医院（hasQty:'是'），共 59-16=43 家
-const UNPURCHASED_QTY = UNPURCHASED.filter(h=>h.hasQty==='是');
-const upCount = UNPURCHASED_QTY.length;
-document.getElementById('unpurchasedCount').textContent  = upCount;
-document.getElementById('unpurchasedCount2').textContent = upCount;
-
-const cities = ['全部',...[...new Set(UNPURCHASED_QTY.map(h=>h.city))]];
-const tabsEl = document.getElementById('cityTabs');
-cities.forEach((city,i)=>{
-  const cnt = city==='全部' ? UNPURCHASED_QTY.length : UNPURCHASED_QTY.filter(h=>h.city===city).length;
-  const tab = document.createElement('div');
-  tab.className='tab'+(i===0?' active':'');
-  tab.innerHTML = `${city} <span style="font-size:10px;opacity:.7">(${cnt})</span>`;
-  tab.onclick=()=>{
-    tabsEl.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-    tab.classList.add('active');
-    renderUnpurchased(city);
-  };
-  tabsEl.appendChild(tab);
-});
-
-function renderUnpurchased(filterCity){
-  const tbody = document.getElementById('tbUnpurchased');
-  tbody.innerHTML='';
-  const list = filterCity==='全部' ? UNPURCHASED_QTY : UNPURCHASED_QTY.filter(h=>h.city===filterCity);
-  let lastCity='', idx=0;
-  list.forEach(h=>{
-    if(filterCity==='全部' && h.city!==lastCity){
-      const n = UNPURCHASED_QTY.filter(x=>x.city===h.city).length;
-      tbody.innerHTML+=`<tr class="city-row"><td colspan="6">▶ ${h.city}（${n}家）</td></tr>`;
-      lastCity=h.city; idx=0;
-    }
-    idx++;
-    tbody.innerHTML+=`<tr>
-      <td>${idx}</td>
-      <td>${h.city}</td>
-      <td><strong>${h.name}</strong></td>
-      <td><span class="badge bg-${h.grade}">${h.grade}级</span></td>
-      <td><span class="${stClass(h.status)}">${h.status}</span></td>
-      <td style="font-size:11px;color:#888">${h.dealer}</td>
-    </tr>`;
-  });
-}
-renderUnpurchased('全部');
-
-// ════════════════════════════════
-//  竞品分析数据
-// ════════════════════════════════
-const COMPETITIVE = [
-  // ── 高风险：无颐合恒瑞，A级医院竞品已入 ──
-  {city:'邢台',   name:'华北医疗健康集团邢台总医院', grade:'A', status:'办理手续等待送货',
-   yh:0, baoSpec:'2.5克', baoCnt:7, pgSpec:'', pgCnt:0,
-   risk:'high', note:'A级医院，佰傲7笔（2.5克），最近2026-07-25，颐合恒瑞未启动，竞品深度占据'},
-  // ── 高风险：无颐合恒瑞，B级医院竞品多笔 ──
-  {city:'石家庄', name:'石家庄市第三医院',             grade:'B', status:'办理手续等待送货',
-   yh:0, baoSpec:'1克', baoCnt:5, pgSpec:'', pgCnt:0,
-   risk:'high', note:'B级医院，佰傲5笔（1克），最近2026-09-11，颐合恒瑞未启动，手续跟进中'},
-  // ── 中风险：无颐合恒瑞，B/C级竞品已入 ──
-  {city:'邢台',   name:'柏乡县中心医院',               grade:'C', status:'正常使用',
-   yh:0, baoSpec:'1克+1.5克+2.5克', baoCnt:4, pgSpec:'0.5克', pgCnt:1,
-   risk:'mid', note:'C级医院，佰傲4笔（1克+1.5克+2.5克），鹏冠1笔（0.5克），最近2026-09-04，颐合恒瑞尚未采购'},
-  {city:'邯郸',   name:'邯郸市中医院',                 grade:'C', status:'办理手续等待送货',
-   yh:0, baoSpec:'', baoCnt:0, pgSpec:'0.5克', pgCnt:2,
-   risk:'mid', note:'C级医院，鹏冠2笔（0.5克），最近2026-09-11，颐合恒瑞有线下发货（120克），尚未平台采购'},
-  {city:'石家庄', name:'新乐市中医医院',               grade:'C', status:'办理手续等待送货',
-   yh:0, baoSpec:'', baoCnt:0, pgSpec:'1克', pgCnt:1,
-   risk:'mid', note:'C级医院，鹏冠1笔（1克），最近2026-08-24，颐合恒瑞尚未采购'},
-  // ── 中风险：有颐合恒瑞但竞品占优 ──
-  {city:'保定',   name:'保定市第一中心医院',           grade:'B', status:'正常使用',
-   yh:1, baoSpec:'1克+1.5克', baoCnt:9, pgSpec:'1克', pgCnt:1,
-   risk:'mid', note:'B级医院，颐合恒瑞1笔，佰傲仍高达9笔（1克+1.5克），鹏冠1笔，竞品仍明显领先，需加快份额'},
-  {city:'保定',   name:'保定市第二医院（老年医院）',   grade:'B', status:'正常使用',
-   yh:4, baoSpec:'1克+1.5克+2克', baoCnt:5, pgSpec:'', pgCnt:0,
-   risk:'mid', note:'多品牌并采，佰傲5笔 > 颐合恒瑞4笔，佰傲仍领先，持续推动科室优先使用颐合'},
-  {city:'石家庄', name:'河北省人民医院',               grade:'A', status:'正常使用',
-   yh:2, baoSpec:'', baoCnt:0, pgSpec:'2克', pgCnt:4,
-   risk:'mid', note:'A级医院，颐合恒瑞2笔（2克），鹏冠4笔（2克），颐合落后，持续推进份额'},
-  {city:'石家庄', name:'河北医科大学第二医院',          grade:'B', status:'正常使用',
-   yh:28, baoSpec:'', baoCnt:0, pgSpec:'2克', pgCnt:20,
-   risk:'low', note:'多品牌并采，颐合恒瑞28笔 > 鹏冠20笔，颐合大幅领先，继续保持份额'},
-  {city:'石家庄', name:'中国人民解放军联勤保障部队第九八〇医院', grade:'B', status:'正常使用',
-   yh:4, baoSpec:'1克+2克+2.5克', baoCnt:5, pgSpec:'', pgCnt:0,
-   risk:'mid', note:'多品牌并采，佰傲5笔 > 颐合恒瑞4笔，颐合恒瑞落后1笔，推动科室优先使用颐合'},
-  {city:'邢台',   name:'邢台市信都区人民医院',         grade:'C', status:'正常使用',
-   yh:5, baoSpec:'', baoCnt:0, pgSpec:'1克', pgCnt:3,
-   risk:'low', note:'多品牌并采，颐合恒瑞5笔 > 鹏冠3笔，颐合领先，持续跟进'},
-  // ── 低风险：有颐合恒瑞，颐合占优 ──
-  {city:'邯郸',   name:'磁县中医院',                   grade:'C', status:'正常使用',
-   yh:3, baoSpec:'1克', baoCnt:1, pgSpec:'', pgCnt:0,
-   risk:'low', note:'多品牌并采，颐合恒瑞3笔 > 佰傲1笔，颐合领先，推动继续扩大份额'},
-  {city:'石家庄', name:'河北省胸科医院',               grade:'B', status:'正常使用',
-   yh:2, baoSpec:'2克', baoCnt:1, pgSpec:'', pgCnt:0,
-   risk:'low', note:'多品牌并采，颐合恒瑞2笔 > 佰傲1笔，颐合占优，持续保持份额'},
-  {city:'廊坊',   name:'河北燕达医院',                 grade:'B', status:'正常使用',
-   yh:6, baoSpec:'', baoCnt:0, pgSpec:'2克', pgCnt:2,
-   risk:'low', note:'多品牌并采，颐合恒瑞6笔 > 鹏冠2笔，颐合大幅领先，份额优势稳固'},
-];
-
-// Render competitive table
-const tbComp = document.getElementById('tbComp');
-const maxCompCnt = 12;
-COMPETITIVE.forEach((h,i)=>{
-  const comp = [];
-  if(h.baoCnt>0) comp.push(`<span class="badge bg-bao">佰傲 ${h.baoSpec}</span> ${h.baoCnt}笔`);
-  if(h.pgCnt>0)  comp.push(`<span class="badge bg-pg">鹏冠 ${h.pgSpec}</span> ${h.pgCnt}笔`);
-  const compTotal = h.baoCnt + h.pgCnt;
-  const yhW   = Math.round(h.yh/maxCompCnt*64);
-  const riskLbl = h.risk==='high' ? '🔴 高风险' : h.risk==='mid' ? '🟡 中风险' : '🟢 低风险';
-  const riskCls = `risk-${h.risk}`;
-  tbComp.innerHTML+=`<tr>
-    <td>${i+1}</td>
-    <td>${h.city}</td>
-    <td><strong>${h.name}</strong></td>
-    <td><span class="badge bg-${h.grade}">${h.grade}级</span></td>
-    <td>${comp.join(' / ') || '—'}</td>
-    <td style="color:${h.yh>0?'#1d5f9e':'#ccc'};font-weight:${h.yh>0?700:400}">${h.yh>0?h.yh+'笔':'未采购'}</td>
-    <td>
-      <div class="comp-bar" title="颐合恒瑞 ${h.yh}笔 vs 竞品 ${compTotal}笔">
-        <div class="cb-yh" style="width:${yhW}px"></div>
-        <span class="cb-lbl" style="color:#4e79a7">${h.yh}</span>
-        <span class="cb-lbl" style="margin:0 2px">vs</span>
-        <div class="cb-bao" style="width:${h.baoCnt>0?Math.round(h.baoCnt/maxCompCnt*64):0}px"></div>
-        <div class="cb-pg"  style="width:${h.pgCnt>0?Math.round(h.pgCnt/maxCompCnt*64):0}px"></div>
-        <span class="cb-lbl" style="color:#c07a00">${compTotal}</span>
-      </div>
-    </td>
-    <td><span class="${riskCls}">${riskLbl}</span></td>
-    <td style="font-size:12px;color:#555">${h.note}</td>
-  </tr>`;
-});
-
-// ════════════════════════════════
-//  竞品对比图
-// ════════════════════════════════
-new Chart(document.getElementById('cComp'),{
-  type:'bar',
-  data:{
-    labels:[
-      '邢台总院\n(A)',
-      '石三院\n(B)',
-      '柏乡中心\n(C)',
-      '邯郸中医\n(C)',
-      '新乐中医\n(C)',
-      '保一中心\n(B)',
-      '保定二院\n(B)',
-      '省人民\n(A)',
-      '医科大二\n(B)',
-      '980医院\n(B)',
-      '信都区\n(C)',
-      '磁县中医\n(C)',
-      '省胸科\n(B)',
-      '燕达医院\n(B)'
-    ],
-    datasets:[
-      {label:'颐合恒瑞', data:[0, 0, 0, 0, 0, 1, 4, 2, 28, 4, 5, 3, 2, 6], backgroundColor:'#4e79a7', borderRadius:3, stack:'s'},
-      {label:'佰傲',     data:[7, 5, 4, 0, 0, 9, 5,  0,  0, 5, 0, 1, 1, 0], backgroundColor:'#f28e2b', borderRadius:3, stack:'s'},
-      {label:'鹏冠',     data:[0, 0, 1, 2, 1, 1, 0,  4, 20, 0, 3, 0, 0, 2], backgroundColor:'#59a14f', borderRadius:3, stack:'s'},
-    ]
-  },
-  options:{
-    responsive:true, maintainAspectRatio:false,
-    plugins:{
-      legend:{position:'top', labels:{font:{size:12}, usePointStyle:true}},
-      tooltip:{callbacks:{
-        title:ctx=>{
-          const names=['华北医疗健康集团邢台总医院','石家庄市第三医院','柏乡县中心医院','邯郸市中医院','新乐市中医医院','保定市第一中心医院','保定市第二医院（老年医院）','河北省人民医院','河北医科大学第二医院','联勤保障部队第九八〇医院','邢台市信都区人民医院','磁县中医院','河北省胸科医院','河北燕达医院'];
-          return names[ctx[0].dataIndex];
-        }
-      }}
-    },
-    scales:{
-      x:{stacked:true, grid:{display:false}, ticks:{font:{size:11}}},
-      y:{stacked:true, beginAtZero:true, grid:{color:gridColor},
-         ticks:{stepSize:2, font:{size:11}},
-         title:{display:true, text:'采购笔数', font:{size:11}, color:'#888'}}
-    }
-  }
-});
-
-// ════════════════════════════════
-//  规格覆盖数据
-// ════════════════════════════════
-const SPEC_COMBOS = {
-  yh: [
-    {label:'仅 1克', cnt:23, color:'#6fa0c7', hospitals:'唐山虹桥骨科医院、三河燕郊福合第一医院、高邑县医院、滦南慈济中医医院、深州市中西医结合医院、滦州市人民医院、张北县医院、河北医科大学第四医院、邯郸汇仁中医医院、磁县人民医院、武安仁慈医院、唐山市中医医院、磁县中医院、保定市第一中心医院、邯郸市人民医院、保定市第二中心医院、临西县中医院、临西县第二人民医院、宁晋县中西医结合医院、平乡县中西医结合医院、沧州和平医院、广安门医院保定医院、邯郸华景医院'},
-    {label:'仅 2克', cnt:14, color:'#4e79a7', hospitals:'定兴县医院、廊坊香河医康医院、张家口市下花园区医院、张家口市宣化区人民医院、河北燕达医院、辛集市第一医院、怀来县医院、河北省胸科医院、平山县人民医院、邢台市信都区人民医院、河北省中医院、中国人民解放军联勤保障部队第九八〇医院、河北省人民医院、辛集市中医院'},
-    {label:'1克 + 2克', cnt:6, color:'#2a5a8c', hospitals:'河间市人民医院、北京大学第三医院秦皇岛医院、河北医科大学第二医院、邯郸市永年区第一医院、保定市第二医院（老年医院）、蔚县蔚州医院'},
-  ],
-  bao: [
-    {label:'仅 0.5克',          cnt:2, color:'#fceacc', hospitals:'石家庄市鹿泉区铜冶镇中心卫生院永壁分院、石家庄长城中西医结合医院'},
-    {label:'仅 1克',            cnt:12, color:'#fad9a0', hospitals:'磁县肿瘤医院、衡水市中西医结合医院、石家庄市第三医院、磁县中医院、武邑骨科医院（武邑裴氏医院）、保定第七医院、定兴县计划生育局职工医院、保定高碑店保康医院、安国市中医院、邯郸市肥乡区中心医院、望都县医院、石家庄市鹿泉区中医院'},
-    {label:'仅 2克',            cnt:2, color:'#f5aa55', hospitals:'华北医疗健康集团石家庄华北医院、河北省胸科医院'},
-    {label:'仅 2.5克',          cnt:9, color:'#f28e2b', hospitals:'华北医疗健康集团邯台总医院骨科医院、廊坊市第四人民医院、邯台棋阳医院、邯台市南和区人民医院、隆化县医院、中国人民解放军陆军第八十二集团军医院、邢台市任泽区人民医院、华北医疗健康集团峰峰总医院、邢台槐阳医院'},
-    {label:'1克 + 1.5克',       cnt:1, color:'#d97b20', hospitals:'保定市第一中心医院'},
-    {label:'1克 + 2克',         cnt:4, color:'#c06a10', hospitals:'河北医科大学第一医院、安平网都医院、容城县中医医院、涞水县医院'},
-    {label:'1克 + 1.5克 + 2克', cnt:1, color:'#a85800', hospitals:'保定市第二医院（老年医院）'},
-    {label:'1克 + 2克 + 2.5克', cnt:1, color:'#a05000', hospitals:'中国人民解放军联勤保障部队第九八〇医院'},
-    {label:'1克 + 1.5克 + 2.5克', cnt:1, color:'#884800', hospitals:'柏乡县中心医院'},
-  ],
-  pg: [
-    {label:'仅 0.5克', cnt:5,  color:'#c8ebc8', hospitals:'邯郸市中医院、柏乡县中心医院、华北医疗健康集团峰峰总医院、沙河市人民医院、邢台市襄都区中心医院'},
-    {label:'仅 1克',   cnt:14, color:'#80c480', hospitals:'邢台市信都区人民医院、保定襄中手足外科医院、固安县中医院、廊坊市人民医院、曲周县中医院、故城县医院、华北医疗健康集团石家庄华北医院、新乐市中医医院、隆化县医院、轩涿总医院（国药堂互联网医院）、广安门医院保定医院、保定市第一中心医院、张家口市宣化区人民医院、兴隆县人民医院'},
-    {label:'仅 2克',   cnt:9,  color:'#59a14f', hospitals:'河北医科大学第二医院、河北省人民医院、河北燕达医院、石家庄市蒙城中西医结合医院、唐山利康医院、京东中美医院、誉美中西医结合肾病医院、平山县人民医院、通用环球中煤岭北医院'},
-    {label:'仅 3克',   cnt:1,  color:'#3d8b35', hospitals:'承德医学院附属医院'},
-  ],
+// ── Helpers ──────────────────────────────────────────────
+const theme = {
+  bg:'#161b22', axisFg:'#8b949e', gridLine:'#21262d',
+  blue:'#58a6ff', green:'#3fb950', orange:'#e3b341',
+  red:'#f85149', purple:'#a78bfa', teal:'#2dd4bf'
 };
-
-function renderSpecTable(tbId, combos) {
-  const tb = document.getElementById(tbId);
-  combos.forEach(c => {
-    const names = c.hospitals.split('、');
-    const nameCells = names.map(n=>`<span style="display:inline-block;background:#fff;border:1px solid #e0e0e0;border-radius:3px;padding:1px 5px;margin:1px 2px;font-size:11px">${n}</span>`).join('');
-    tb.innerHTML += `<tr>
-      <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;white-space:nowrap">
-        <span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${c.color};margin-right:4px;vertical-align:middle"></span>
-        <strong>${c.label}</strong>
-      </td>
-      <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;text-align:center;font-weight:700;color:#333">${c.cnt}</td>
-      <td style="padding:6px 8px;border-bottom:1px solid #e8e8e8;line-height:1.8">${nameCells}</td>
-    </tr>`;
-  });
+function baseOpts(title) {
+  return {
+    backgroundColor:'transparent',
+    textStyle:{color:theme.axisFg, fontFamily:'"PingFang SC","Microsoft YaHei",sans-serif'},
+    tooltip:{backgroundColor:'#21262d',borderColor:'#30363d',textStyle:{color:'#e6edf3'}},
+    legend:{textStyle:{color:theme.axisFg},pageTextStyle:{color:theme.axisFg}},
+    grid:{left:10,right:10,top:30,bottom:36,containLabel:true},
+  };
 }
-renderSpecTable('specTbYH',  SPEC_COMBOS.yh);
-renderSpecTable('specTbBao', SPEC_COMBOS.bao);
-renderSpecTable('specTbPg',  SPEC_COMBOS.pg);
 
-// 规格覆盖对比图（grouped horizontal bar）
-new Chart(document.getElementById('cSpecCov'), {
-  type: 'bar',
-  data: {
-    labels: ['0.5克', '1克', '1.5克', '2克', '2.5克', '3克'],
-    datasets: [
-      {label:'颐合恒瑞', data:[0, 29, 0, 20, 0, 0],  backgroundColor:colors.yh,  borderRadius:4},
-      {label:'佰傲',     data:[2, 20, 3,  8, 11, 0],  backgroundColor:colors.bao, borderRadius:4},
-      {label:'鹏冠',     data:[5, 14, 0,  9,  0, 1],  backgroundColor:colors.pg,  borderRadius:4},
-    ]
-  },
-  options: {
-    indexAxis: 'y',
-    responsive: true, maintainAspectRatio: false,
-    plugins: {
-      legend: {position:'top', labels:{font:{size:12}, usePointStyle:true}},
-      tooltip: {callbacks:{label: ctx => `${ctx.dataset.label}: ${ctx.raw}家医院`}}
-    },
-    scales: {
-      x: {beginAtZero:true, grid:{color:gridColor}, ticks:{stepSize:1, font:{size:11}},
-          title:{display:true, text:'医院数', font:{size:11}, color:'#888'}},
-      y: {grid:{display:false}, ticks:{font:{size:12}}}
-    }
-  }
-});
+// ── Chart 1: 各地市采购量柱图 ─────────────────────────────
+(function(){
+  const chart = echarts.init(document.getElementById('chart-city-bar'));
+  const cities = CITIES.filter(c=>CSTATS[c]);
+  const vals   = cities.map(c=>CSTATS[c].total_g||0);
+  const opts = Object.assign(baseOpts(), {
+    xAxis:{type:'category',data:cities,axisLabel:{color:theme.axisFg,fontSize:11,rotate:30},axisLine:{lineStyle:{color:theme.gridLine}},splitLine:{show:false}},
+    yAxis:{type:'value',axisLabel:{color:theme.axisFg,fontSize:10},splitLine:{lineStyle:{color:theme.gridLine}},axisLine:{show:false}},
+    series:[{
+      type:'bar', data:vals, barMaxWidth:28,
+      itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,
+        [{offset:0,color:'#388bfd'},{offset:1,color:'#1f6feb'}])},
+      label:{show:true,position:'top',color:theme.axisFg,fontSize:10,formatter:p=>p.value||''}
+    }]
+  });
+  chart.setOption(opts);
+  window.addEventListener('resize',()=>chart.resize());
+})();
 
-// ════════════════════════════════
-// 4. Spec distribution bar
-new Chart(document.getElementById('cSpec'),{
-  type:'bar',
-  data:{
-    labels:[
-      ['颐合恒瑞','2克'], ['颐合恒瑞','1克'],
-      ['佰傲','1克'], ['佰傲','2克'], ['佰傲','2.5克'], ['佰傲','1.5克'], ['佰傲','0.5克'],
-      ['鹏冠','2克'], ['鹏冠','1克'], ['鹏冠','3克']
-    ],
-    datasets:[{
-      label:'采购笔数',
-      data:[77, 63, 83, 44, 34, 3, 3, 33, 25, 1],
-      backgroundColor:[
-        colors.yh,'#7fa8c7',
-        colors.bao,'#f5aa55','#f8c87c','#fad9a0','#fceacc',
-        colors.pg,'#80c480','#c8ebc8'
+// ── Chart 2: 级别分布饼图 ─────────────────────────────────
+(function(){
+  const chart = echarts.init(document.getElementById('chart-grade'));
+  const opts = Object.assign(baseOpts(), {
+    legend:{bottom:0,textStyle:{color:theme.axisFg,fontSize:11}},
+    series:[{
+      type:'pie', radius:['48%','72%'], center:['50%','45%'],
+      data:[
+        {value:KPI.grade_A, name:'A级·核心', itemStyle:{color:'#da3633'}},
+        {value:KPI.grade_B, name:'B级·重点', itemStyle:{color:'#d29922'}},
+        {value:KPI.grade_C, name:'C级·其他', itemStyle:{color:'#30363d'}},
       ],
-      borderRadius:5
+      label:{show:true,formatter:'{b}\n{c}家',color:theme.axisFg,fontSize:11},
+      emphasis:{itemStyle:{shadowBlur:10,shadowOffsetX:0,shadowColor:'rgba(0,0,0,.5)'}}
     }]
-  },
-  options:{
-    responsive:true, maintainAspectRatio:false,
-    plugins:{
-      legend:{display:false},
-      tooltip:{
-        callbacks:{
-          title:(items)=>{
-            const lb=items[0].label;
-            return Array.isArray(lb)?lb.join(' '):lb;
-          },
-          label:(ctx)=>`采购笔数：${ctx.parsed.y} 笔`
-        }
+  });
+  chart.setOption(opts);
+  window.addEventListener('resize',()=>chart.resize());
+})();
+
+// ── Chart 3: 规格占比 ─────────────────────────────────────
+(function(){
+  const chart = echarts.init(document.getElementById('chart-spec'));
+  const total_1g_g = KPI.q1g*1;
+  const total_2g_g = KPI.q2g*2;
+  const opts = Object.assign(baseOpts(), {
+    legend:{bottom:0,textStyle:{color:theme.axisFg,fontSize:11}},
+    series:[{
+      type:'pie', radius:['48%','72%'], center:['50%','45%'],
+      data:[
+        {value:total_1g_g, name:'1克规格·'+total_1g_g+'克', itemStyle:{color:'#2dd4bf'}},
+        {value:total_2g_g, name:'2克规格·'+total_2g_g+'克', itemStyle:{color:'#388bfd'}},
+      ],
+      label:{show:true,formatter:p=>p.name.split('·')[0]+'\n'+p.value+'克\n('+Math.round(p.percent)+'%)',color:theme.axisFg,fontSize:11},
+      emphasis:{itemStyle:{shadowBlur:10}}
+    }]
+  });
+  chart.setOption(opts);
+  window.addEventListener('resize',()=>chart.resize());
+})();
+
+// ── Chart 4: 月度对比 ─────────────────────────────────────
+(function(){
+  const chart = echarts.init(document.getElementById('chart-monthly'));
+  // 按医院规格比例将月份个数换算为克：avg_g = total_g / subtotal
+  const cityJulG = {}, cityAugG = {};
+  DATA.forEach(r => {
+    if (!r.subtotal) return;
+    const avgG = r.total_g / r.subtotal;
+    cityJulG[r.city] = (cityJulG[r.city] || 0) + r.sep * avgG;
+    cityAugG[r.city] = (cityAugG[r.city] || 0) + r.oct * avgG;
+  });
+  const cities = CITIES.filter(c=>CSTATS[c]&&((cityJulG[c]||0)+(cityAugG[c]||0)>0));
+  const julVals = cities.map(c=>Math.round(cityJulG[c]||0));
+  const augVals = cities.map(c=>Math.round(cityAugG[c]||0));
+  const opts = Object.assign(baseOpts(), {
+    legend:{top:0,textStyle:{color:theme.axisFg,fontSize:11}},
+    xAxis:{type:'category',data:cities,axisLabel:{color:theme.axisFg,fontSize:11,rotate:20},axisLine:{lineStyle:{color:theme.gridLine}},splitLine:{show:false}},
+    yAxis:{type:'value',axisLabel:{color:theme.axisFg,fontSize:10},splitLine:{lineStyle:{color:theme.gridLine}}},
+    series:[
+      {name:'9月(克)',type:'bar',data:julVals,barMaxWidth:20,itemStyle:{color:'#a78bfa'},stack:'m',label:{show:true,position:'inside',fontSize:9,formatter:p=>p.value||''}},
+      {name:'10月(克)',type:'bar',data:augVals,barMaxWidth:20,itemStyle:{color:'#388bfd'},stack:'m',label:{show:true,position:'inside',fontSize:9,formatter:p=>p.value||''}}
+    ]
+  });
+  chart.setOption(opts);
+  window.addEventListener('resize',()=>chart.resize());
+})();
+
+// ── Chart 5: 状态分布 ─────────────────────────────────────
+(function(){
+  const chart = echarts.init(document.getElementById('chart-status'));
+  const normalN  = DATA.filter(r=>r.status==='正常使用').length;
+  const waitN    = DATA.filter(r=>r.status==='办理手续等待送货').length;
+  const submitN  = DATA.filter(r=>r.status==='已提单等待上会').length;
+  const otherN   = DATA.length - normalN - waitN - submitN;
+  const opts = Object.assign(baseOpts(), {
+    legend:{bottom:0,textStyle:{color:theme.axisFg,fontSize:10}},
+    series:[{
+      type:'pie', radius:['45%','70%'], center:['50%','44%'],
+      data:[
+        {value:normalN,  name:'正常使用',  itemStyle:{color:'#3fb950'}},
+        {value:waitN,    name:'办理手续中', itemStyle:{color:'#e3b341'}},
+        {value:submitN,  name:'等待上会',   itemStyle:{color:'#58a6ff'}},
+        {value:otherN,   name:'其他',       itemStyle:{color:'#3d444d'}},
+      ].filter(d=>d.value>0),
+      label:{show:true,formatter:'{b}\n{c}家',color:theme.axisFg,fontSize:11},
+    }]
+  });
+  chart.setOption(opts);
+  window.addEventListener('resize',()=>chart.resize());
+})();
+
+// ── Chart 6: 省代发货 vs 实采 top城市 ─────────────────────
+(function(){
+  const chart = echarts.init(document.getElementById('chart-chain'));
+  const cities = CITIES.filter(c=>CSTATS[c]&&CSTATS[c].ship_g>0).sort((a,b)=>(CSTATS[b].ship_g||0)-(CSTATS[a].ship_g||0)).slice(0,8);
+  const opts = Object.assign(baseOpts(), {
+    legend:{top:0,textStyle:{color:theme.axisFg,fontSize:10}},
+    grid:{left:8,right:10,top:30,bottom:36,containLabel:true},
+    xAxis:{type:'category',data:cities,axisLabel:{color:theme.axisFg,fontSize:11,rotate:20},splitLine:{show:false}},
+    yAxis:{type:'value',axisLabel:{color:theme.axisFg,fontSize:10},splitLine:{lineStyle:{color:theme.gridLine}}},
+    series:[
+      {name:'省代发货(克)',type:'bar',barMaxWidth:18,data:cities.map(c=>CSTATS[c].ship_g||0),itemStyle:{color:'#e3b341'}},
+      {name:'实采(克)',    type:'bar',barMaxWidth:18,data:cities.map(c=>CSTATS[c].total_g||0),itemStyle:{color:'#3fb950'}}
+    ]
+  });
+  chart.setOption(opts);
+  window.addEventListener('resize',()=>chart.resize());
+})();
+
+// ── Chart 6: 每周新增克数 ─────────────────────────────────
+(function(){
+  const chart = echarts.init(document.getElementById('chart-weekly'));
+  const weeks = ["7/13-19", "7/20-26", "7/27-8/2", "8/3-9", "8/10-16", "8/17-23", "8/24-30", "8/31-9/6", "9/7-13", "9/14-20", "9/21-27", "9/28-10/4", "10/5-11"];
+  const grams = [18, 93, 93, 256, 51, 87, 256, 236, 226, 313, 96, 199, 15];
+  const avg   = Math.round(grams.reduce((a,b)=>a+b,0)/grams.length);
+  const opts = Object.assign(baseOpts(), {
+    tooltip:{trigger:'axis',formatter:p=>`${p[0].name}<br/>采购量：<b>${p[0].value} 克</b>`},
+    xAxis:{type:'category',data:weeks,axisLabel:{color:theme.axisFg,fontSize:11},axisLine:{lineStyle:{color:theme.gridLine}},splitLine:{show:false}},
+    yAxis:{type:'value',name:'克',nameTextStyle:{color:theme.axisFg,fontSize:10},axisLabel:{color:theme.axisFg,fontSize:10},splitLine:{lineStyle:{color:theme.gridLine}},axisLine:{show:false}},
+    series:[
+      {
+        type:'bar', data:grams, barMaxWidth:40,
+        itemStyle:{color:p=>p.value>=200?new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#f85149'},{offset:1,color:'#da3633'}]):new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#388bfd'},{offset:1,color:'#1f6feb'}])},
+        label:{show:true,position:'top',color:theme.axisFg,fontSize:11,fontWeight:600,formatter:p=>p.value+'克'}
+      },
+      {
+        type:'line', data:grams.map(()=>avg), smooth:true, symbol:'none',
+        lineStyle:{color:'#e3b341',type:'dashed',width:1.5},
+        markPoint:{data:[],silent:true},
+        tooltip:{show:false}
       }
-    },
-    scales:{
-      y:{beginAtZero:true, grid:{color:gridColor}, ticks:{font:{size:11}},
-         title:{display:true,text:'笔数',font:{size:11},color:'#888'}},
-      x:{grid:{display:false}, ticks:{font:{size:11}}}
-    }
-  }
+    ],
+    graphic:[{type:'text',left:'center',bottom:2,style:{text:'— 均值 '+avg+'克/周',fill:'#e3b341',fontSize:10}}]
+  });
+  chart.setOption(opts);
+  window.addEventListener('resize',()=>chart.resize());
+})();
+
+// ── Filter 初始化 ─────────────────────────────────────────
+const citySelect = document.getElementById('f-city');
+[...new Set(DATA.map(r=>r.city))].sort().forEach(c=>{
+  const o = document.createElement('option'); o.value=c; o.textContent=c;
+  citySelect.appendChild(o);
 });
 
-// 5. Frequency distribution
-new Chart(document.getElementById('cFreq'),{
-  type:'bar',
-  data:{
-    labels:['1笔\n(19家)','2笔\n(13家)','3-7笔\n(8家)','≥8笔\n(3家)'],
-    datasets:[{
-      label:'医院数',
-      data:[19, 13, 8, 3],
-      backgroundColor:['#90b8d8','#6fa0c7','#4e79a7','#e15759'],
-      borderRadius:6
-    }]
-  },
-  options:{
-    responsive:true, maintainAspectRatio:false,
-    plugins:{
-      legend:{display:false},
-      tooltip:{
-        callbacks:{
-          label:(ctx)=>`${ctx.parsed.y} 家医院`,
-          afterLabel:(ctx)=>{
-            const notes=[
-              '',
-              '',
-              '燕达(6笔)·医科大四(6笔)·保二院(4笔)·联勤九八〇(4笔)·邢台信都区(5笔)·武安仁慈(3笔)·张家口下花园(3笔)·磁县中医院(3笔)',
-              '医科大二(28笔)·河间(19笔)·怀来(14笔)'
-            ];
-            return notes[ctx.dataIndex]||'';
-          }
-        }
-      }
-    },
-    scales:{
-      y:{beginAtZero:true, ticks:{stepSize:3, font:{size:11}}, grid:{color:gridColor},
-         title:{display:true,text:'医院数（家）',font:{size:11},color:'#888'}},
-      x:{grid:{display:false}, ticks:{font:{size:12}}}
-    }
-  }
+// ── Table 渲染 ─────────────────────────────────────────────
+let sortCol = 'city', sortDir = 1;
+function gradeTag(g){
+  const cls = {A:'grade-A',B:'grade-B',C:'grade-C'}[g]||'grade-empty';
+  return `<span class="${cls}">${g||'—'}</span>`;
+}
+function statusClass(s){
+  if(s==='正常使用')         return 'status-normal';
+  if(s==='办理手续等待送货') return 'status-wait';
+  if(s==='已提单等待上会')   return 'status-submit';
+  return 'status-other';
+}
+function srcClass(s){
+  if(s==='月报+828') return 'src-both';
+  if(s==='828')      return 'src-828';
+  return 'src-yuebao';
+}
+function numCell(v, cls=''){
+  if(!v) return `<td class="num-cell num-zero">—</td>`;
+  return `<td class="num-cell num-pos ${cls}">${v}</td>`;
+}
+const MAX_SUBTOTAL = Math.max(...DATA.map(r=>r.subtotal||0), 1);
+
+function renderTable(data){
+  const tbody = document.getElementById('table-body');
+  document.getElementById('filter-count').textContent = `显示 ${data.length} / ${DATA.length} 家`;
+  tbody.innerHTML = data.map((r,i)=>{
+    const bar = r.subtotal ? `<span class="bar-inline" style="width:${Math.round(r.subtotal/MAX_SUBTOTAL*60)}px"></span>` : '';
+    return `<tr>
+      <td style="color:#6e7681;font-size:11px;text-align:center">${i+1}</td>
+      <td style="max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${r.hospital}">${r.hospital}</td>
+      <td>${r.city}</td>
+      <td>${gradeTag(r.grade)}</td>
+      <td style="max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#8b949e;font-size:11px" title="${r.agent}">${r.agent}</td>
+      <td class="${r.linked==='否'?'linked-no':''} ">${r.linked}</td>
+      <td class="${statusClass(r.status)}">${r.status}</td>
+      ${numCell(r.ship_g)}
+      ${numCell(r.jul)}
+      ${numCell(r.aug)}
+      ${numCell(r.sep)}
+      ${numCell(r.oct)}
+      ${numCell(r.q1g)}
+      ${numCell(r.q2g)}
+      <td class="num-cell ${r.total_g?'total-g-cell':'num-zero'}">${r.total_g||'—'}${bar}</td>
+      <td style="color:#6e7681;font-size:11px">${r.last||'—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+function applyFilters(){
+  const city    = document.getElementById('f-city').value;
+  const grade   = document.getElementById('f-grade').value;
+  const status  = document.getElementById('f-status').value;
+  const purch   = document.getElementById('f-purchase').value;
+  const search  = document.getElementById('f-search').value.toLowerCase();
+  let out = DATA.filter(r=>{
+    if(city   && r.city!==city)       return false;
+    if(grade  && r.grade!==grade)     return false;
+    if(status && r.status!==status)   return false;
+    if(purch==='yes' && !r.subtotal)  return false;
+    if(purch==='no'  &&  r.subtotal)  return false;
+    if(search && !r.hospital.toLowerCase().includes(search) && !r.agent.toLowerCase().includes(search)) return false;
+    return true;
+  });
+  // sort
+  out.sort((a,b)=>{
+    let va=a[sortCol], vb=b[sortCol];
+    if(va==null) va=''; if(vb==null) vb='';
+    if(typeof va==='number') return (va-vb)*sortDir;
+    return va.toString().localeCompare(vb.toString(),'zh-CN')*sortDir;
+  });
+  renderTable(out);
+}
+
+['f-city','f-grade','f-status','f-purchase'].forEach(id=>
+  document.getElementById(id).addEventListener('change', applyFilters));
+document.getElementById('f-search').addEventListener('input', applyFilters);
+
+// 列排序
+document.querySelectorAll('th[data-col]').forEach(th=>{
+  th.addEventListener('click',()=>{
+    const col = th.dataset.col;
+    if(sortCol===col) sortDir*=-1; else {sortCol=col; sortDir=1;}
+    document.querySelectorAll('th .sort-icon').forEach(s=>s.textContent='');
+    th.innerHTML = th.innerHTML.replace(/ [↑↓]$/,'') + (sortDir===1?' ↑':' ↓');
+    applyFilters();
+  });
 });
 
-// ── Top Pie - 三品牌采购医院占比 ──
-const topPieLabelPlugin = {
-  id: 'topPieLabel',
-  afterDatasetsDraw(chart) {
-    const {ctx, data} = chart;
-    const total = data.datasets[0].data.reduce((a,b) => a+b, 0);
-    const bgColors = data.datasets[0].backgroundColor;
-    chart.getDatasetMeta(0).data.forEach((arc, i) => {
-      const {x, y, startAngle, endAngle, outerRadius} = arc.getProps(['x','y','startAngle','endAngle','outerRadius'], true);
-      const midAngle = (startAngle + endAngle) / 2;
-      const r = outerRadius + 20;
-      const lx = x + Math.cos(midAngle) * r;
-      const ly = y + Math.sin(midAngle) * r;
-      const pct = (data.datasets[0].data[i] / total * 100).toFixed(1) + '%';
-      ctx.save();
-      ctx.fillStyle = bgColors[i];
-      ctx.font = 'bold 12px -apple-system,BlinkMacSystemFont,"Microsoft YaHei",sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(pct, lx, ly);
-      ctx.restore();
-    });
-  }
-};
-new Chart(document.getElementById('cTopPie'),{
-  type:'doughnut',
-  plugins:[topPieLabelPlugin],
-  data:{
-    labels:['颐合恒瑞','佰傲','鹏冠'],
-    datasets:[{
-      data:[35,33,25],
-      backgroundColor:[colors.yh, colors.bao, colors.pg],
-      borderWidth:3, borderColor:'#fff',
-      hoverOffset:8
-    }]
-  },
-  options:{
-    responsive:true, maintainAspectRatio:false,
-    cutout:'60%',
-    layout:{padding:{top:20, bottom:4, left:20, right:20}},
-    plugins:{
-      legend:{position:'bottom', labels:{font:{size:12}, padding:12, usePointStyle:true, boxWidth:10}},
-      tooltip:{callbacks:{label:ctx=>{
-        const total=ctx.dataset.data.reduce((a,b)=>a+b,0);
-        return `${ctx.label}: ${ctx.raw}家 (${(ctx.raw/total*100).toFixed(1)}%)`;
-      }}}
-    }
-  }
-});
-
-// ── Top Bar - 三品牌采购笔数对比 ──
-new Chart(document.getElementById('cTopBar'),{
-  type:'bar',
-  data:{
-    labels:['颐合恒瑞','佰傲','鹏冠'],
-    datasets:[{
-      label:'采购笔数',
-      data:[102,146,58],
-      backgroundColor:[colors.yh, colors.bao, colors.pg],
-      borderRadius:6, borderSkipped:false
-    }]
-  },
-  options:{
-    responsive:true, maintainAspectRatio:false,
-    plugins:{
-      legend:{display:false},
-      tooltip:{callbacks:{label:ctx=>`${ctx.raw}笔 (${(ctx.raw/306*100).toFixed(1)}%)`}},
-      datalabels: undefined
-    },
-    scales:{
-      y:{beginAtZero:true, grid:{color:gridColor}, ticks:{font:{size:11}},
-         title:{display:true, text:'笔数', font:{size:11}, color:'#aaa'}},
-      x:{grid:{display:false}, ticks:{font:{size:12}}}
-    }
-  }
-});
-
+applyFilters();
 </script>
 </body>
 </html>
